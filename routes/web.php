@@ -27,11 +27,12 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
+    Route::get('/history', [DashboardController::class, 'showHistory'])->name('history');
 });
 
-Route::get('/history', function () {
-    return view('history');
-})->middleware(['auth', 'verified'])->name('history');
+// Route::get('/history', function () {
+//     return view('history');
+// })->middleware(['auth', 'verified'])->name('history');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

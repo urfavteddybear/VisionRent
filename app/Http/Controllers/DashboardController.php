@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\History;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Rental;
 
@@ -22,5 +23,12 @@ class DashboardController extends Controller
             ->get();
 
         return view('dashboard', compact('rentals'));
+    }
+    public function showHistory()
+    {
+        $user = Auth::user();
+        $histories = History::where('user_id', $user->id)
+            ->get();
+        return view('history', compact('histories'));
     }
 }
