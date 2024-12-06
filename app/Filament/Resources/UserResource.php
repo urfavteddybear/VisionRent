@@ -42,9 +42,11 @@ class UserResource extends Resource
         return $table->columns([
             Tables\Columns\TextColumn::make('name')
                 ->label('Nama')
+                ->searchable()
                 ->sortable(),
             Tables\Columns\TextColumn::make('email')
                 ->label('Email')
+                ->searchable()
                 ->sortable(),
         ]);
     }
