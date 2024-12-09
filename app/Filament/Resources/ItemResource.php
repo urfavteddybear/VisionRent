@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
 
 class ItemResource extends Resource
 {
@@ -33,6 +34,22 @@ class ItemResource extends Resource
                 ->label('Stok')
                 ->numeric()
                 ->required(),
+            Forms\Components\TextInput::make('price')
+                ->label('Harga')
+                ->numeric()
+                ->required(),
+            Forms\Components\FileUpload::make('picture')
+                ->disk('local')
+                ->visibility('public')
+                ->directory('items')
+                ->label('Foto')
+                // ->storeFileNamesIn('original_filename')
+                ->multiple(true)
+                ->previewable(true)
+                ->required(),
+            Forms\Components\Textarea::make('description')
+                ->label('Deskripsi')
+                ->required(),
         ]);
     }
 
@@ -48,6 +65,9 @@ class ItemResource extends Resource
                 ->sortable(),
             Tables\Columns\TextColumn::make('stock')
                 ->label('Stok')
+                ->sortable(),
+            Tables\Columns\TextColumn::make('price')
+                ->label('Harga')
                 ->sortable(),
         ]);
     }
