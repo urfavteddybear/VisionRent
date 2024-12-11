@@ -32,8 +32,15 @@ class UserResource extends Resource
             Forms\Components\TextInput::make('password')
                 ->label('Password')
                 ->password()
-                ->required()
-                ->minLength(8),
+                ->minLength(8)
+                ->required(fn($livewire) => $livewire instanceof Pages\CreateUser),
+            Forms\Components\Select::make('role')
+                ->label('Role')
+                ->options([
+                    'admin' => 'Admin',
+                    'customer' => 'Customer',
+                ])
+                ->default('admin'),
         ]);
     }
 
@@ -46,6 +53,10 @@ class UserResource extends Resource
                 ->sortable(),
             Tables\Columns\TextColumn::make('email')
                 ->label('Email')
+                ->searchable()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('role')
+                ->label('Role')
                 ->searchable()
                 ->sortable(),
         ]);
@@ -67,3 +78,4 @@ class UserResource extends Resource
         ];
     }
 }
+
