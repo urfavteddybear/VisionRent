@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Models\History;
 use App\Models\Item;
 use App\Models\Rental;
 use App\Models\User;
@@ -39,6 +40,38 @@ class StatsOverview extends BaseWidget
             })->toArray();
         }
 
+        function calculateMonthlyIncome(): string
+        {
+            $currentYear = Carbon::now()->year;
+            $currentMonth = Carbon::now()->month;
+
+            // Calculate income from Rentals (each rental represents a single item)
+            $rentalIncome = Rental::where('status', 'rented')
+                ->whereYear('start_date', $currentYear)
+                ->whereMonth('start_date', $currentMonth)
+                ->get()
+                ->sum(function ($rental) {
+                    $daysRented = $rental->start_date->diffInDays($rental->end_date); // Calculate number of days rented
+                    return $rental->item->price * $daysRented;  // Multiply price by days rented
+                });
+
+            // Calculate income from History (each history entry represents a single item)
+            $historyIncome = History::whereYear('start_date', $currentYear)
+                ->whereMonth('start_date', $currentMonth)
+                ->get()
+                ->sum(function ($history) {
+                    $daysRented = $history->start_date->diffInDays($history->end_date); // Calculate number of days rented
+                    return $history->item->price * $daysRented;  // Multiply price by days rented
+                });
+
+            // Total income in Rupiah format
+            $totalIncome = $rentalIncome + $historyIncome;
+
+            // Format the income in Rupiah with commas for thousands
+            return 'Rp ' . number_format($totalIncome, 0, ',', '.');
+        }
+
+
         return [
             Stat::make('New Users', User::whereYear('created_at', Carbon::now()->year)
                 ->whereMonth('created_at', Carbon::now()->month)
@@ -49,7 +82,10 @@ class StatsOverview extends BaseWidget
                 ->chart(getUsersPerMonth()),
 
 
-            Stat::make('Total Items',Item::sum('stock')),
+                Stat::make('Total Income', calculateMonthlyIncome())
+                ->description('Total income this month')
+                ->descriptionIcon('heroicon-m-currency-dollar')
+                ->color('primary'),
 
 
             Stat::make('Total Items Rented', Rental::where('status', 'rented')->count())
