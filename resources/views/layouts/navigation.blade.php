@@ -102,6 +102,13 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
+
+                @if (Auth::check() && Auth::user()->role === 'admin')
+                        <x-responsive-nav-link :href="url('/admin')">
+                            {{ __('Admin') }}
+                        </x-responsive-nav-link>
+                        @endif
+
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
