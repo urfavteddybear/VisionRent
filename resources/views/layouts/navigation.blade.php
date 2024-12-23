@@ -43,6 +43,16 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        @if (Auth::check() && Auth::user()->role === 'admin')
+                        <x-dropdown-link :href="url('/admin')">
+                            {{ __('Admin') }}
+                        </x-dropdown-link>
+                        @endif
+
+
+
+
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -91,6 +101,13 @@
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+
+                @if (Auth::check() && Auth::user()->role === 'admin')
+                        <x-responsive-nav-link :href="url('/admin')">
+                            {{ __('Admin') }}
+                        </x-responsive-nav-link>
+                        @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
