@@ -64,8 +64,14 @@ class StatsOverview extends BaseWidget
                     return $history->item->price * $daysRented;  // Multiply price by days rented
                 });
 
+            // Calculate penalty from History (each history entry can have a penalty)
+            $penaltyIncome = History::whereYear('start_date', $currentYear)
+                ->whereMonth('start_date', $currentMonth)
+                ->get()
+                ->sum('penalty_total');
+
             // Total income in Rupiah format
-            $totalIncome = $rentalIncome + $historyIncome;
+            $totalIncome = $rentalIncome + $historyIncome + $penaltyIncome;
 
             // Format the income in Rupiah with commas for thousands
             return 'Rp ' . number_format($totalIncome, 0, ',', '.');
