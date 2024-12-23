@@ -84,8 +84,14 @@ class HistoryResource extends Resource
                 ->label('Total Penalti')
                 ->money('IDR')
                 ->sortable(),
+
+            Tables\Columns\TextColumn::make('total_cost')
+                ->label('Total Biaya')
+                ->money('IDR')
+                ->sortable(),
         ]);
     }
+
 
     public static function getRelations(): array
     {

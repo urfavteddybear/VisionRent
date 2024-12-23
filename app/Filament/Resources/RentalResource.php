@@ -62,7 +62,7 @@ class RentalResource extends Resource
                 ->sortable(),
         ])
         ->actions([
-            Tables\Actions\Action::make('return') // Tombol untuk "Barang Dikembalikan"
+            Tables\Actions\Action::make('return') // Action for "Barang Dikembalikan"
                 ->label('Barang Dikembalikan')
                 ->action(function (Rental $record) {
                     if ($record->status === 'returned') {
@@ -70,16 +70,25 @@ class RentalResource extends Resource
                         return;
                     }
 
-                    // Menghitung penalti
+                    // Calculate the overdue days if applicable
                     $returnDate = now();
                     $overdueDays = $returnDate->greaterThan($record->end_date)
                         ? $returnDate->diffInDays($record->end_date)
                         : 0;
 
+                    // Calculate penalty percentage
                     $penaltyPercent = $record->item->penalty_percent ?? 0;
+
+                    // Calculate penalty total
                     $penaltyTotal = $overdueDays * ($record->item->price * $penaltyPercent / 100);
 
-                    // Memindahkan data ke History
+                    // Calculate rental duration in days
+                    $rentalDays = $record->start_date->diffInDays($record->end_date);
+
+                    // Calculate the total cost of the rental (price * rental days + penalty)
+                    $totalCost = ($rentalDays * $record->item->price) + $penaltyTotal;
+
+                    // Create a History entry
                     History::create([
                         'user_id' => $record->user_id,
                         'item_id' => $record->item_id,
@@ -88,21 +97,25 @@ class RentalResource extends Resource
                         'return_date' => $returnDate,
                         'status' => 'returned',
                         'penalty_total' => $penaltyTotal,
+                        'total_cost' => $totalCost,  // Save total cost here
                     ]);
 
-                    // Menambah stok barang
+                    // Increment stock of the item
                     $record->item->increment('stock');
 
-                    // Menghapus record rental
+                    // Delete rental record
                     $record->delete();
 
-                    // Menampilkan notifikasi
+                    // Notify success
                     // $this->notify('success', 'Barang berhasil dikembalikan, dipindahkan ke riwayat, dan stok diperbarui.');
                 })
                 ->color('success')
-                ->visible(fn (Rental $record) => $record->status === 'rented'), // Tombol hanya terlihat jika status 'rented'
+                ->visible(fn (Rental $record) => $record->status === 'rented'),
         ]);
     }
+
+
+
 
     public static function getRelations(): array
     {

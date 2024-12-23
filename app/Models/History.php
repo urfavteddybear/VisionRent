@@ -17,6 +17,7 @@ class History extends Model
         'return_date',
         'status',
         'penalty_total',
+        'total_cost', // Add this to store the calculated total cost
     ];
 
     protected $casts = [
