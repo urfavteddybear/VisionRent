@@ -14,6 +14,8 @@ class HistoryResource extends Resource
 {
     protected static ?string $model = History::class;
 
+    protected static ?string $navigationGroup = "Transactions";
+
     protected static ?string $navigationIcon = 'heroicon-s-bars-arrow-down';
 
     public static function form(Forms\Form $form): Forms\Form

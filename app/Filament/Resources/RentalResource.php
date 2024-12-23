@@ -14,6 +14,7 @@ class RentalResource extends Resource
 {
     protected static ?string $model = Rental::class;
 
+    protected static ?string $navigationGroup = "Transactions";
     protected static ?string $navigationIcon = 'heroicon-o-calendar-date-range';
 
     public static function form(Forms\Form $form): Forms\Form

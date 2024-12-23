@@ -18,6 +18,8 @@ class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
 
+    protected static ?string $navigationGroup = "Transactions";
+
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     public static function form(Forms\Form $form): Forms\Form
