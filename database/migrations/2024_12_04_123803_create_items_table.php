@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->integer('stock');
+            $table->integer('price');
+            $table->string('picture')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
-            $table->integer('price')->after('stock');
-            $table->string('picture')->nullable()->after('price');
-            $table->text('description')->nullable()->after('picture');
         });
 
     }
