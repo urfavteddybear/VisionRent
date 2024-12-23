@@ -9,7 +9,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id', 'stock', 'price', 'picture', 'description'];
+    protected $fillable = ['name', 'category_id', 'stock', 'price', 'penalty_percent', 'picture', 'description'];
 
     protected $casts = [
         'picture' => 'array'

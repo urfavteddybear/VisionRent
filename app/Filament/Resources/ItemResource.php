@@ -38,6 +38,14 @@ class ItemResource extends Resource
                 ->label('Harga')
                 ->numeric()
                 ->required(),
+            Forms\Components\TextInput::make('penalty_percent')
+                ->label('Persentase Penalti (%)')
+                ->numeric()
+                ->minValue(0)
+                ->maxValue(100)
+                ->step(0.01)
+                ->default(0)
+                ->required(),
             Forms\Components\FileUpload::make('picture')
                 ->disk('local')
                 ->visibility('public')
@@ -68,6 +76,9 @@ class ItemResource extends Resource
                 ->sortable(),
             Tables\Columns\TextColumn::make('price')
                 ->label('Harga')
+                ->sortable(),
+            Tables\Columns\TextColumn::make('penalty_percent')
+                ->label('Persentase Penalti (%)')
                 ->sortable(),
         ]);
     }
