@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\HistoryResource\Actions\ExportPdfAction;
 use App\Filament\Resources\HistoryResource\Pages;
 use App\Models\History;
 use Filament\Forms;
@@ -91,7 +92,11 @@ class HistoryResource extends Resource
                 ->label('Total Biaya')
                 ->money('IDR')
                 ->sortable(),
+        ])
+        ->headerActions([
+            ExportPdfAction::make(),
         ]);
+
     }
 
 
