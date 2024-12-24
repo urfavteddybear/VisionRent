@@ -24,10 +24,6 @@
                         <p class="text-lg font-medium text-gray-800 dark:text-gray-200">{{ $rental->end_date }}</p>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Total Biaya</p>
-                        <p class="text-lg font-medium text-gray-800 dark:text-gray-200">{{ $rental->end_date }}</p>
-                    </div>
-                    <div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Status</p>
                         <p class="text-lg font-medium text-gray-800 dark:text-gray-200">
                             {{ $rental->status === 'rented' ? 'Dipinjam' : 'Dikembalikan' }}
