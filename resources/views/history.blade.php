@@ -19,6 +19,9 @@
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Nama Barang</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Tanggal Mulai</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Tanggal Selesai</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Tanggal Pengembalian</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Jumlah Pinalti</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Total</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700 dark:text-gray-300">Status</th>
                                 </tr>
                             </thead>
@@ -30,6 +33,9 @@
                                         </td>
                                         <td class="px-4 py-2 text-gray-600 dark:text-gray-400">{{ $history->start_date }}</td>
                                         <td class="px-4 py-2 text-gray-600 dark:text-gray-400">{{ $history->end_date }}</td>
+                                        <td class="px-4 py-2 text-gray-600 dark:text-gray-400">{{ $history->return_date }}</td>
+                                        <td class="px-4 py-2 text-gray-600 dark:text-gray-400">Rp {{ number_format($history->penalty_total, 0, ',', '.') }}</td>
+                                        <td class="px-4 py-2 text-gray-600 dark:text-gray-400">Rp {{ number_format($history->total_cost, 0, ',', '.') }}</td>
                                         <td class="px-4 py-2 text-gray-600 dark:text-gray-400">{{ $history->status }}</td>
                                     </tr>
                                 @endforeach
