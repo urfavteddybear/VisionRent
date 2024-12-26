@@ -3,23 +3,19 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RentalResource\Pages;
-use App\Filament\Resources\RentalResource\RelationManagers;
 use App\Models\Rental;
-use App\Models\History; // Import model History
+use App\Models\History; // Import History model
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Actions\Action;  // Pastikan Action diimport
-use Filament\Actions; // Import Actions
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RentalResource extends Resource
 {
     protected static ?string $model = Rental::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "Transactions";
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-date-range';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -27,16 +23,19 @@ class RentalResource extends Resource
             Forms\Components\Select::make('user_id')
                 ->label('Pelanggan')
                 ->relationship('user', 'email') // Menggunakan email untuk dropdown
-                ->searchable() // Membuat dropdown searchable
+                ->searchable()
                 ->required(),
+
             Forms\Components\Select::make('item_id')
                 ->label('Barang')
                 ->relationship('item', 'name') // Menggunakan nama item
                 ->searchable()
                 ->required(),
+
             Forms\Components\DatePicker::make('start_date')
                 ->label('Tanggal Mulai')
                 ->required(),
+
             Forms\Components\DatePicker::make('end_date')
                 ->label('Tanggal Selesai')
                 ->required(),
@@ -50,18 +49,21 @@ class RentalResource extends Resource
                 ->label('Pelanggan')
                 ->sortable()
                 ->searchable(),
+
             Tables\Columns\TextColumn::make('item.name')
                 ->label('Barang')
                 ->sortable(),
+
             Tables\Columns\TextColumn::make('start_date')
                 ->label('Tanggal Mulai')
                 ->sortable(),
+
             Tables\Columns\TextColumn::make('end_date')
                 ->label('Tanggal Selesai')
                 ->sortable(),
         ])
-        ->actions([  // Definisikan tindakan tombol di setiap baris
-            Tables\Actions\Action::make('return')  // Tombol "Barang Dikembalikan"
+        ->actions([
+            Tables\Actions\Action::make('return') // Action for "Barang Dikembalikan"
                 ->label('Barang Dikembalikan')
                 ->action(function (Rental $record) {
                     if ($record->status === 'returned') {
@@ -69,35 +71,56 @@ class RentalResource extends Resource
                         return;
                     }
 
-                    // Memindahkan data ke History
+                    // Calculate the overdue days if applicable
+                    $returnDate = now();
+                    $overdueDays = $returnDate->greaterThan($record->end_date)
+                        ? $returnDate->diffInDays($record->end_date)
+                        : 0;
+
+                    // Calculate penalty percentage
+                    $penaltyPercent = $record->item->penalty_percent ?? 0;
+
+                    // Calculate penalty total
+                    $penaltyTotal = $overdueDays * ($record->item->price * $penaltyPercent / 100);
+
+                    // Calculate rental duration in days
+                    $rentalDays = $record->start_date->diffInDays($record->end_date);
+
+                    // Calculate the total cost of the rental (price * rental days + penalty)
+                    $totalCost = ($rentalDays * $record->item->price) + $penaltyTotal;
+
+                    // Create a History entry
                     History::create([
                         'user_id' => $record->user_id,
                         'item_id' => $record->item_id,
                         'start_date' => $record->start_date,
                         'end_date' => $record->end_date,
+                        'return_date' => $returnDate,
                         'status' => 'returned',
+                        'penalty_total' => $penaltyTotal,
+                        'total_cost' => $totalCost,  // Save total cost here
                     ]);
 
-                    // Kembalikan stok barang
-                    $item = $record->item;
-                    $item->increment('stock');
+                    // Increment stock of the item
+                    $record->item->increment('stock');
 
-                    // Hapus rental dari tabel
+                    // Delete rental record
                     $record->delete();
 
-                    // Notifikasi untuk memberitahukan bahwa barang telah dikembalikan, dipindahkan ke history, dan stok diperbarui
-                    //Action::message('success', 'Barang berhasil dikembalikan, dipindahkan ke riwayat, dan stok diperbarui.');
+                    // Notify success
+                    // $this->notify('success', 'Barang berhasil dikembalikan, dipindahkan ke riwayat, dan stok diperbarui.');
                 })
                 ->color('success')
-                ->visible(fn (Rental $record) => $record->status === 'rented')  // Tombol hanya muncul jika status 'rented'
+                ->visible(fn (Rental $record) => $record->status === 'rented'),
         ]);
     }
 
+
+
+
     public static function getRelations(): array
     {
-        return [
-            // Menambahkan relasi jika perlu
-        ];
+        return [];
     }
 
     public static function getPages(): array
@@ -106,7 +129,6 @@ class RentalResource extends Resource
             'index' => Pages\ListRentals::route('/'),
             'create' => Pages\CreateRental::route('/create'),
             'edit' => Pages\EditRental::route('/{record}/edit'),
-            'history' => Pages\HistoryRentals::route('/history'),
         ];
     }
 }

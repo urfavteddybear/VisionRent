@@ -18,7 +18,9 @@ class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "Transactions";
+
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -37,6 +39,14 @@ class ItemResource extends Resource
             Forms\Components\TextInput::make('price')
                 ->label('Harga')
                 ->numeric()
+                ->required(),
+            Forms\Components\TextInput::make('penalty_percent')
+                ->label('Persentase Penalti (%)')
+                ->numeric()
+                ->minValue(0)
+                ->maxValue(100)
+                ->step(0.01)
+                ->default(0)
                 ->required(),
             Forms\Components\FileUpload::make('picture')
                 ->disk('local')
@@ -68,6 +78,9 @@ class ItemResource extends Resource
                 ->sortable(),
             Tables\Columns\TextColumn::make('price')
                 ->label('Harga')
+                ->sortable(),
+            Tables\Columns\TextColumn::make('penalty_percent')
+                ->label('Persentase Penalti (%)')
                 ->sortable(),
         ]);
     }

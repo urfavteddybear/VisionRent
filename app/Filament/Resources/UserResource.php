@@ -12,12 +12,15 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "Management";
+
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -32,8 +35,17 @@ class UserResource extends Resource
             Forms\Components\TextInput::make('password')
                 ->label('Password')
                 ->password()
-                ->required()
-                ->minLength(8),
+                ->minLength(8)
+                ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                ->dehydrated(fn ($state) => filled($state))
+                ->required(fn ($livewire) => $livewire instanceof Pages\CreateUser),
+            Forms\Components\Select::make('role')
+                ->label('Role')
+                ->options([
+                    'admin' => 'Admin',
+                    'customer' => 'Customer',
+                ])
+                ->default('admin'),
         ]);
     }
 
@@ -46,6 +58,10 @@ class UserResource extends Resource
                 ->sortable(),
             Tables\Columns\TextColumn::make('email')
                 ->label('Email')
+                ->searchable()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('role')
+                ->label('Role')
                 ->searchable()
                 ->sortable(),
         ]);
