@@ -97,7 +97,7 @@
                     <img src="{{ $equipment['image'] }}" alt="{{ $equipment['name'] }}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
-                        <p class="text-sm text-gray-600">{{ $equipment['description'] }}</p>
+                        <p class="text-sm text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
                         <a href="/equipment/{{ $equipment['id'] }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
-                        <p class="text-sm text-gray-600">{{ $item['description'] }}</p>
+                        <p class="text-sm text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
                         <a href="/support/{{ $item['id'] }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                     <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
-                        <p class="text-sm text-gray-600">{{ $item['description'] }}</p>
+                        <p class="text-sm text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
                         <a href="/support/{{ $item['id'] }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                     </div>
                 </div>
@@ -192,17 +192,6 @@
             <a href="/login" class="block px-3 py-2 bg-white text-gray-800 rounded-md">Login</a>
         </div>
     </div>
-
-    {{-- @push('scripts') --}}
-    {{-- <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.mobile-menu-button');
-        const mobileMenu = document.querySelector('.mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -237,6 +226,5 @@
             });
         });
     </script>
-    {{-- @endpush --}}
 </body>
 </html>

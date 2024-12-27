@@ -22,8 +22,9 @@ class HomeController extends Controller
             return [
                 'id' => $item->id,
                 'name' => $item->name,
-                'description' => $item->description,
+                // 'description' => $item->description,
                 'image' => $imageUrl,
+                'price' => $item->price,
             ];
         };
 
