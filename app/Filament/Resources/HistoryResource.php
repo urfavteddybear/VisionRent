@@ -2,22 +2,22 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\HistoryResource\Actions\ExportPdfAction;
 use App\Filament\Resources\HistoryResource\Pages;
-use App\Filament\Resources\HistoryResource\RelationManagers;
 use App\Models\History;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class HistoryResource extends Resource
 {
     protected static ?string $model = History::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = "Transactions";
+
+    protected static ?string $navigationIcon = 'heroicon-s-bars-arrow-down';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -26,18 +26,36 @@ class HistoryResource extends Resource
                 ->label('Pelanggan')
                 ->relationship('user', 'email') // Menggunakan email untuk dropdown
                 ->searchable()
-                ->required(),
+                ->required()
+                ->disabled(),
+
             Forms\Components\Select::make('item_id')
                 ->label('Barang')
                 ->relationship('item', 'name') // Menggunakan nama item
                 ->searchable()
-                ->required(),
+                ->required()
+                ->disabled(),
+
             Forms\Components\DatePicker::make('start_date')
                 ->label('Tanggal Mulai')
-                ->required(),
+                ->required()
+                ->disabled(),
+
             Forms\Components\DatePicker::make('end_date')
                 ->label('Tanggal Selesai')
-                ->required(),
+                ->required()
+                ->disabled(),
+
+            Forms\Components\DatePicker::make('return_date')
+                ->label('Tanggal Pengembalian')
+                ->required()
+                ->disabled(),
+
+            Forms\Components\TextInput::make('penalty_total')
+                ->label('Total Penalti')
+                ->numeric()
+                ->prefix('IDR')
+                ->disabled(),
         ]);
     }
 
@@ -48,23 +66,43 @@ class HistoryResource extends Resource
                 ->label('Pelanggan')
                 ->sortable()
                 ->searchable(),
+
             Tables\Columns\TextColumn::make('item.name')
                 ->label('Barang')
                 ->sortable(),
+
             Tables\Columns\TextColumn::make('start_date')
                 ->label('Tanggal Mulai')
                 ->sortable(),
+
             Tables\Columns\TextColumn::make('end_date')
                 ->label('Tanggal Selesai')
                 ->sortable(),
+
+            Tables\Columns\TextColumn::make('return_date')
+                ->label('Tanggal Pengembalian')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('penalty_total')
+                ->label('Total Penalti')
+                ->money('IDR')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('total_cost')
+                ->label('Total Biaya')
+                ->money('IDR')
+                ->sortable(),
+        ])
+        ->headerActions([
+            ExportPdfAction::make(),
         ]);
+
     }
+
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

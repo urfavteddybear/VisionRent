@@ -14,7 +14,10 @@ class History extends Model
         'item_id',
         'start_date',
         'end_date',
+        'return_date',
         'status',
+        'penalty_total',
+        'total_cost', // Add this to store the calculated total cost
     ];
 
     protected $casts = [
