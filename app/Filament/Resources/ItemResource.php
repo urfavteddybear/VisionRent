@@ -49,7 +49,7 @@ class ItemResource extends Resource
                 ->default(0)
                 ->required(),
             Forms\Components\FileUpload::make('picture')
-                ->disk('local')
+                ->disk('public')
                 ->visibility('public')
                 ->directory('items')
                 ->label('Foto')
