@@ -82,7 +82,8 @@ class ItemResource extends Resource
             Tables\Columns\TextColumn::make('penalty_percent')
                 ->label('Persentase Penalti (%)')
                 ->sortable(),
-        ]);
+        ])
+        ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
