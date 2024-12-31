@@ -123,6 +123,51 @@
 
     <div class="h-16 bg-gray-800"></div>
 
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Our Brands</h2>
+
+            <!-- Logo slider container -->
+            <div class="relative w-full overflow-hidden">
+                <!-- Gradient overlays -->
+                <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
+
+                <!-- Scrolling container -->
+                <div class="relative flex overflow-x-hidden">
+                    <!-- First set of logos -->
+                    <div class="flex animate-scroll py-8 shrink-0">
+                        @php
+                        $brands = [
+                            ['image' => asset('images/sony.png'), 'name' => 'Sony'],
+                            ['image' => asset('images/canon.png'), 'name' => 'Canon'],
+                            ['image' => asset('images/gopro.png'), 'name' => 'GoPro'],
+                            ['image' => asset('images/godox.png'), 'name' => 'GoDox'],
+                            ['image' => asset('images/nikon.png'), 'name' => 'Nikon'],
+                            ['image' => asset('images/sandisk.png'), 'name' => 'Sandisk'],
+                        ];
+                        @endphp
+
+                        @foreach($brands as $brand)
+                            <div class="flex-shrink-0 w-52 mx-12 grayscale hover:grayscale-0 transition-all duration-300">
+                                <img src="{{ $brand['image'] }}" alt="{{ $brand['name'] }}" class="w-full h-24 object-contain">
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Duplicate for seamless scroll -->
+                    <div class="flex animate-scroll py-8 shrink-0">
+                        @foreach($brands as $brand)
+                            <div class="flex-shrink-0 w-52 mx-12 grayscale hover:grayscale-0 transition-all duration-300">
+                                <img src="{{ $brand['image'] }}" alt="{{ $brand['name'] }}" class="w-full h-24 object-contain">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Equipment Section -->
     <section class="py-12 px-4">
         <div class="max-w-7xl mx-auto">
@@ -186,50 +231,6 @@
         </div>
     </section>
 
-    <section class="py-12 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Our Brands</h2>
-
-            <!-- Logo slider container -->
-            <div class="relative w-full overflow-hidden">
-                <!-- Gradient overlays -->
-                <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
-
-                <!-- Scrolling container -->
-                <div class="relative flex overflow-x-hidden">
-                    <!-- First set of logos -->
-                    <div class="flex animate-scroll py-8 shrink-0">
-                        @php
-                        $brands = [
-                            ['image' => asset('images/sony.png'), 'name' => 'Sony'],
-                            ['image' => asset('images/canon.png'), 'name' => 'Canon'],
-                            ['image' => asset('images/gopro.png'), 'name' => 'GoPro'],
-                            ['image' => asset('images/godox.png'), 'name' => 'GoDox'],
-                            ['image' => asset('images/nikon.png'), 'name' => 'Nikon'],
-                            ['image' => asset('images/sandisk.png'), 'name' => 'Sandisk'],
-                        ];
-                        @endphp
-
-                        @foreach($brands as $brand)
-                            <div class="flex-shrink-0 w-52 mx-12 grayscale hover:grayscale-0 transition-all duration-300">
-                                <img src="{{ $brand['image'] }}" alt="{{ $brand['name'] }}" class="w-full h-24 object-contain">
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <!-- Duplicate for seamless scroll -->
-                    <div class="flex animate-scroll py-8 shrink-0">
-                        @foreach($brands as $brand)
-                            <div class="flex-shrink-0 w-52 mx-12 grayscale hover:grayscale-0 transition-all duration-300">
-                                <img src="{{ $brand['image'] }}" alt="{{ $brand['name'] }}" class="w-full h-24 object-contain">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
