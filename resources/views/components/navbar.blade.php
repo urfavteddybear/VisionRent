@@ -12,10 +12,9 @@
             <div class="hidden md:block">
                 <div class="flex items-center space-x-4">
                     <a href="/" class="px-3 py-2 hover:text-gray-300">Homepage</a>
-                    <a href="/equipment" class="px-3 py-2 hover:text-gray-300">Equipment</a>
-                    <a href="/featured" class="px-3 py-2 hover:text-gray-300">Featured</a>
+                    <a href="{{ url('/') }}#featured-equipment" class="px-3 py-2 hover:text-gray-300">Featured</a>
                     <a href="/about" class="px-3 py-2 hover:text-gray-300">About Us</a>
-                    <a href="/contact" class="px-3 py-2 hover:text-gray-300">Contact Us</a>
+                    <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="px-3 py-2 hover:text-gray-300">Contact Us</a>
 
                     @auth
                         <a href="{{ url('/dashboard') }}" class="bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">Dashboard</a>
