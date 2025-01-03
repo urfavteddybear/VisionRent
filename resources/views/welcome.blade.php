@@ -17,75 +17,91 @@
             max-height: 400px;
             opacity: 1;
         }
+        @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+        }
+
+        .animate-scroll {
+            animation: scroll 45s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
-    <!-- Navigation -->
-    <nav class="bg-gray-800 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center">
-                        <img src="{{ asset('images/2.png') }}" alt="Vision Rent" class="h-8 w-auto">
-                    </a>
-                </div>
+    @include('components.navbar')
 
-                <!-- Desktop Menu (hidden on mobile) -->
-                <div class="hidden md:block">
-                    <div class="flex items-center space-x-4">
-                        <a href="/" class="px-3 py-2 hover:text-gray-300">Homepage</a>
-                        <a href="/equipment" class="px-3 py-2 hover:text-gray-300">Equipment</a>
-                        <a href="/featured" class="px-3 py-2 hover:text-gray-300">Featured</a>
-                        <a href="/about" class="px-3 py-2 hover:text-gray-300">About Us</a>
-                        <a href="/contact" class="px-3 py-2 hover:text-gray-300">Contact Us</a>
+    <div class="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
+        <!-- Banner image -->
+        <div class="absolute inset-0">
+            <img
+                src="{{ asset('images/visionrent-banner.jpg') }}"
+                alt="Camera Equipment"
+                class="w-full h-full object-cover"
+            >
+            <!-- Dark overlay -->
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
 
-                        @auth
-                            <a href="{{ url('/dashboard') }}" class="bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="bg-white text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">Login</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">Register</a>
-                            @endif
-                        @endauth
+        <!-- Banner content -->
+        <div class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-start">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Professional Camera Equipment Rental
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
+                High-quality cameras, lenses, and accessories for your creative projects
+            </p>
+            <a href="/equipment" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors duration-200 text-lg font-semibold">
+                Browse Equipment
+            </a>
+        </div>
+    </div>
+
+    <div class="h-16 bg-gray-800"></div>
+
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Our Brands</h2>
+
+            <!-- Logo slider container -->
+            <div class="relative w-full overflow-hidden">
+                <!-- Gradient overlays -->
+                <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
+
+                <!-- Scrolling container -->
+                <div class="relative flex overflow-x-hidden">
+                    <!-- First set of logos -->
+                    <div class="flex animate-scroll py-8 shrink-0">
+                        @php
+                        $brands = [
+                            ['image' => asset('images/sony.png'), 'name' => 'Sony'],
+                            ['image' => asset('images/canon.png'), 'name' => 'Canon'],
+                            ['image' => asset('images/gopro.png'), 'name' => 'GoPro'],
+                            ['image' => asset('images/godox.png'), 'name' => 'GoDox'],
+                            ['image' => asset('images/nikon.png'), 'name' => 'Nikon'],
+                            ['image' => asset('images/sandisk.png'), 'name' => 'Sandisk'],
+                        ];
+                        @endphp
+
+                        @foreach($brands as $brand)
+                            <div class="flex-shrink-0 w-52 mx-12 grayscale hover:grayscale-0 transition-all duration-300">
+                                <img src="{{ $brand['image'] }}" alt="{{ $brand['name'] }}" class="w-full h-24 object-contain">
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Duplicate for seamless scroll -->
+                    <div class="flex animate-scroll py-8 shrink-0">
+                        @foreach($brands as $brand)
+                            <div class="flex-shrink-0 w-52 mx-12 grayscale hover:grayscale-0 transition-all duration-300">
+                                <img src="{{ $brand['image'] }}" alt="{{ $brand['name'] }}" class="w-full h-24 object-contain">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-
-                <!-- Mobile menu button -->
-                <button type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none transition-colors duration-200" id="mobile-menu-button">
-                    <span class="sr-only">Open main menu</span>
-                    <!-- Hamburger icon -->
-                    <svg class="h-6 w-6 transition-transform duration-200 ease-in-out" id="menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <!-- Close icon (hidden by default) -->
-                    <svg class="h-6 w-6 hidden transition-transform duration-200 ease-in-out" id="close-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
             </div>
         </div>
-
-        <!-- Mobile menu (hidden by default) -->
-        <div class="mobile-menu-enter md:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="/" class="block px-3 py-2 text-white hover:bg-gray-700 rounded-md">Homepage</a>
-                <a href="/equipment" class="block px-3 py-2 text-white hover:bg-gray-700 rounded-md">Equipment</a>
-                <a href="/featured" class="block px-3 py-2 text-white hover:bg-gray-700 rounded-md">Featured</a>
-                <a href="/about" class="block px-3 py-2 text-white hover:bg-gray-700 rounded-md">About Us</a>
-                <a href="/contact" class="block px-3 py-2 text-white hover:bg-gray-700 rounded-md">Contact Us</a>
-
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="block px-3 py-2 bg-white text-gray-800 rounded-md">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="block px-3 py-2 bg-white text-gray-800 rounded-md">Login</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="block px-3 py-2 bg-gray-700 text-white rounded-md mt-1">Register</a>
-                    @endif
-                @endauth
-            </div>
-        </div>
-    </nav>
+    </section>
 
     <!-- Featured Equipment Section -->
     <section class="py-12 px-4">
@@ -150,81 +166,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <img src="{{ asset('images/2.png') }}" alt="Vision Rent" class="h-12 mb-4">
-                <p class="text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <div class="flex space-x-4 mt-4">
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <span class="sr-only">Instagram</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 3.75a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zM12 9a3 3 0 11-6 0 3 3 0 016 0zm6 3a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
-                    </a>
-                    <!-- Add other social icons similarly -->
-                </div>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="/" class="text-gray-400 hover:text-white">Homepage</a></li>
-                    <li><a href="/equipment" class="text-gray-400 hover:text-white">Equipment</a></li>
-                    <li><a href="/featured" class="text-gray-400 hover:text-white">Featured</a></li>
-                    <li><a href="/about" class="text-gray-400 hover:text-white">About Us</a></li>
-                    <li><a href="/contact" class="text-gray-400 hover:text-white">Contact Us</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-lg font-semibold mb-4">Address</h3>
-                <p class="text-gray-400">JL Testing Parlamentur No. 81<br>Denpasar, Bali, Indonesia</p>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Mobile menu -->
-    <div class="mobile-menu hidden md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-800">
-            <a href="/" class="block px-3 py-2 text-white hover:bg-gray-700">Homepage</a>
-            <a href="/equipment" class="block px-3 py-2 text-white hover:bg-gray-700">Equipment</a>
-            <a href="/featured" class="block px-3 py-2 text-white hover:bg-gray-700">Featured</a>
-            <a href="/about" class="block px-3 py-2 text-white hover:bg-gray-700">About Us</a>
-            <a href="/contact" class="block px-3 py-2 text-white hover:bg-gray-700">Contact Us</a>
-            <a href="/login" class="block px-3 py-2 bg-white text-gray-800 rounded-md">Login</a>
-        </div>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-            let isMenuOpen = false;
-
-            mobileMenuButton.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-
-                // Animate icons
-                menuIcon.classList.toggle('hidden');
-                closeIcon.classList.toggle('hidden');
-
-                // Rotate the visible icon
-                const visibleIcon = isMenuOpen ? closeIcon : menuIcon;
-                visibleIcon.style.transform = isMenuOpen ? 'rotate(90deg)' : 'rotate(0)';
-
-                // Animate menu
-                if (isMenuOpen) {
-                    mobileMenu.classList.add('show');
-                } else {
-                    mobileMenu.classList.remove('show');
-                }
-
-                // Add a slight bounce to the button
-                mobileMenuButton.classList.add('scale-95');
-                setTimeout(() => {
-                    mobileMenuButton.classList.remove('scale-95');
-                }, 100);
-            });
-        });
-    </script>
+    @include('components.footer')
 </body>
 </html>

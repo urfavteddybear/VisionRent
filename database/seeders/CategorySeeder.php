@@ -9,10 +9,9 @@ class CategorySeeder extends Seeder
 {
     public function run()
     {
-        $categories = ['DSLR', 'Mirrorless', 'Action Camera', 'Lenses', 'Accessories'];
+        $categories = ['DSLR', 'Mirrorless', 'Action Camera', 'Lenses', 'Accessories', 'Lighting', 'Audio'];
         foreach ($categories as $category) {
             Category::create(['name' => $category]);
         }
     }
 }
-
