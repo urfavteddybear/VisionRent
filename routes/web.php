@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/item/{item}', [App\Http\Controllers\ItemController::class, 'show'])->name('item.show');
+Route::get('/camera-support', [App\Http\Controllers\ItemController::class, 'cameraSupportIndex'])->name('camera-support.index');
+Route::get('/lighting-audio', [App\Http\Controllers\ItemController::class, 'lightingAudioIndex'])->name('lighting-audio.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

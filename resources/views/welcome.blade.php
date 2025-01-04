@@ -25,6 +25,11 @@
         .animate-scroll {
             animation: scroll 45s linear infinite;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100">
@@ -50,7 +55,9 @@
             <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
                 High-quality cameras, lenses, and accessories for your creative projects
             </p>
-            <a href="/equipment" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors duration-200 text-lg font-semibold">
+
+            <a href="#featured-equipment" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors duration-200 text-lg font-semibold">
+
                 Browse Equipment
             </a>
         </div>
@@ -104,7 +111,7 @@
     </section>
 
     <!-- Featured Equipment Section -->
-    <section class="py-12 px-4">
+    <section id="featured-equipment" class="py-12 px-4">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-8">Featured Equipment</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -114,7 +121,7 @@
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
                         <p class="text-sm text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
-                        <a href="/equipment/{{ $equipment['id'] }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
+                        <a href="{{ route('item.show', $equipment['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                     </div>
                 </div>
                 @endforeach
@@ -133,13 +140,13 @@
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
                         <p class="text-sm text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
-                        <a href="/support/{{ $item['id'] }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
+                        <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                     </div>
                 </div>
                 @endforeach
             </div>
             <div class="text-center mt-8">
-                <a href="/support" class="inline-block bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-200">VIEW MORE</a>
+                <a href="{{ route('camera-support.index') }}" class="inline-block bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-200">VIEW MORE</a>
             </div>
         </div>
     </section>
@@ -155,18 +162,18 @@
                     <div class="p-4">
                         <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
                         <p class="text-sm text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
-                        <a href="/support/{{ $item['id'] }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
+                        <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                     </div>
                 </div>
                 @endforeach
             </div>
             <div class="text-center mt-8">
-                <a href="/lighting-audio" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-700">VIEW MORE</a>
+                <a href="{{ route('lighting-audio.index') }}" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-700">VIEW MORE</a>
             </div>
         </div>
     </section>
 
-
     @include('components.footer')
+
 </body>
 </html>
