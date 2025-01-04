@@ -29,11 +29,17 @@ Route::get('/lighting-audio', [App\Http\Controllers\ItemController::class, 'ligh
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/about', function () {
+    return view('about_us');
+})->name('about');
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
     Route::get('/history', [DashboardController::class, 'showHistory'])->name('history');
+
 });
 
 // Route::get('/history', function () {
