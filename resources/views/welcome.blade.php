@@ -25,9 +25,11 @@
         .animate-scroll {
             animation: scroll 45s linear infinite;
         }
+
         html {
             scroll-behavior: smooth;
         }
+
     </style>
 </head>
 <body class="bg-gray-100">
@@ -53,7 +55,9 @@
             <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
                 High-quality cameras, lenses, and accessories for your creative projects
             </p>
+
             <a href="#featured-equipment" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors duration-200 text-lg font-semibold">
+
                 Browse Equipment
             </a>
         </div>
