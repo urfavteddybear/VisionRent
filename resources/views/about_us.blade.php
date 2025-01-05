@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Vision Rent</title>
     @vite('resources/css/app.css')
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;600;700&display=swap');
+
+    body {
+    font-family: 'Roboto', sans-serif;
+    }
+
+    h1, h2, h3 {
+    font-family: 'Inter', sans-serif;
+    }
+        .mobile-menu-enter {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+        }
+        .mobile-menu-enter.show {
+            max-height: 400px;
+            opacity: 1;
+        }
+        @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+        }
+
+        .animate-scroll {
+            animation: scroll 45s linear infinite;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+    </style>
 </head>
 <body class="bg-gray-100">
     @include('components.navbar')

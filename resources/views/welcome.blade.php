@@ -44,44 +44,7 @@
 <body class="bg-gray-100">
     @include('components.navbar')
 
-   <!-- Hero Section -->
-   <div class="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
-    <div x-data="{ current: 0, images: ['visionrent-banner.jpg', 'visionrent-banner2.jpg', 'visionrent-banner3.jpg'] }" class="h-full w-full relative">
-        <template x-for="(image, index) in images" :key="index">
-            <div x-show="current === index" class="absolute inset-0 w-full h-full">
-                <img :src="" alt="Camera Equipment" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent"></div>
-            </div>
-        </template>
-
-        <!-- Banner content -->
-        <div class="absolute inset-0 max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-start">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Professional Camera Equipment Rental
-            </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
-                High-quality cameras, lenses, and accessories for your creative projects
-            </p>
-            <a href="#featured-equipment" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition text-lg font-semibold">
-                Browse Equipment
-            </a>
-        </div>
-
-        <!-- Navigation buttons -->
-        <div class="absolute inset-x-0 bottom-4 flex justify-center space-x-2">
-            <template x-for="(image, index) in images" :key="index">
-                <button @click="current = index" :class="{ 'bg-white': current === index, 'bg-gray-600': current !== index }" class="w-3 h-3 rounded-full"></button>
-            </template>
-        </div>
-
-        <button @click="current = (current + images.length - 1) % images.length" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80">
-            &lt;
-        </button>
-        <button @click="current = (current + 1) % images.length" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-2 rounded-full hover:bg-black/80">
-            &gt;
-        </button>
-    </div>
-</div>
+   
 
     <div class="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
         <!-- Banner image -->
@@ -153,7 +116,7 @@
                             <img src="{{ $equipment['image'] }}" alt="{{ $equipment['name'] }}" class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
-                                <p class="text-sm text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
+                                <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
                                 <a href="{{ route('item.show', $equipment['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">
                                     View More
                                 </a>
@@ -209,7 +172,7 @@
                 <img src="{{ $equipment['image'] }}" alt="{{ $equipment['name'] }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
-                    <p class="text-sm text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
+                    <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
                     <a href="{{ route('item.show', $equipment['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">
                         View More
                     </a>
@@ -230,7 +193,7 @@
                 <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
-                    <p class="text-sm text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
+                    <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
                     <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                 </div>
             </div>
@@ -252,7 +215,7 @@
                 <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
-                    <p class="text-sm text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
+                    <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
                     <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
                 </div>
             </div>
