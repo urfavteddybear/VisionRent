@@ -11,7 +11,8 @@
            <!-- Desktop Menu -->
            <div class="hidden md:flex space-x-6">
             <a href="/" class="hover:text-gray-300 text-lg font-medium pt-2 {{ request()->is('/') ? 'text-red-500' : '' }}">Home</a>
-            <a href="#featured-equipment" class="hover:text-gray-300 text-lg font-medium pt-2">Featured</a>
+            <a href="/items" class="hover:text-gray-300 text-lg font-medium pt-2 {{ request()->is('items') ? 'text-red-500' : '' }}">Catalog</a>
+            {{-- <a href="#featured-equipment" class="hover:text-gray-300 text-lg font-medium pt-2">Featured</a> --}}
             <a href="/about" class="hover:text-gray-300 text-lg font-medium pt-2 {{ request()->is('about') ? 'text-red-500' : '' }}">About Us</a>
             <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="hover:text-gray-300 text-lg font-medium pt-2">Contact Us</a>
 
@@ -45,7 +46,9 @@
         <div class="px-4 pt-4 pb-6 space-y-2">
             <a href="/" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('/') ? 'text-red-500' : 'text-white' }}">Home</a>
 
-            <a href="{{ url('/') }}#featured-equipment" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('featured-equipment') ? 'text-red-500' : 'text-white' }}">Featured</a>
+            {{-- <a href="{{ url('/') }}#featured-equipment" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('featured-equipment') ? 'text-red-500' : 'text-white' }}">Featured</a> --}}
+
+            <a href="/items" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('items') ? 'text-red-500' : 'text-white' }}">Catalog</a>
 
             <a href="/about" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('about') ? 'text-red-500' : 'text-white' }}">About Us</a>
 

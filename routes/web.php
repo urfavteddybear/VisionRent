@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RentalController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/item/{item}', [App\Http\Controllers\ItemController::class, 'show'])->name('item.show');
 Route::get('/camera-support', [App\Http\Controllers\ItemController::class, 'cameraSupportIndex'])->name('camera-support.index');
 Route::get('/lighting-audio', [App\Http\Controllers\ItemController::class, 'lightingAudioIndex'])->name('lighting-audio.index');
+Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

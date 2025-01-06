@@ -123,7 +123,7 @@
             <p class="text-gray-600 mb-8">
                 Explore our wide range of camera equipment and get started today!
             </p>
-            <a href="{{ url('/') }}#featured-equipment" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-700 transition text-lg font-semibold">
+            <a href="/items" class="bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-700 transition text-lg font-semibold">
                 Browse Equipment
             </a>
         </div>

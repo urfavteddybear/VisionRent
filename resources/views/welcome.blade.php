@@ -71,7 +71,7 @@
             </p>
 
             <!-- CTA Button -->
-            <a href="#featured-equipment" class="bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-red-500 transition-all duration-200 text-lg font-semibold tracking-wide">
+            <a href="/items" class="bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-red-500 transition-all duration-200 text-lg font-semibold tracking-wide">
                 Browse Equipment
             </a>
         </div>
@@ -268,7 +268,7 @@
             @endforeach
         </div>
         <div class="text-center mt-8">
-            <a href="{{ route('camera-support.index') }}" class="inline-block bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-200">VIEW MORE</a>
+            <a href="/items" class="inline-block bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-200">VIEW MORE</a>
         </div>
     </div>
 </section>
@@ -290,7 +290,7 @@
             @endforeach
         </div>
         <div class="text-center mt-8">
-            <a href="{{ route('lighting-audio.index') }}" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-700">VIEW MORE</a>
+            <a href="/items" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-md hover:bg-gray-700">VIEW MORE</a>
         </div>
     </div>
 </section>

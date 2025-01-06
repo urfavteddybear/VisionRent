@@ -9,6 +9,25 @@ use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
+    public function index(Request $request)
+    {
+        $categories = Category::all();
+        $selectedCategory = $request->query('category');
+
+        $items = Item::with('category')
+            ->when($selectedCategory, function ($query) use ($selectedCategory) {
+                return $query->where('category_id', $selectedCategory);
+            })
+            ->latest()
+            ->paginate(12);
+
+        $items->getCollection()->transform(function ($item) {
+            $item->imageUrl = isset($item->picture[0]) ? Storage::url($item->picture[0]) : null;
+            return $item;
+        });
+
+        return view('items.index', compact('categories', 'items', 'selectedCategory'));
+    }
     public function show(Item $item)
     {
         // Transform the image paths to full URLs
