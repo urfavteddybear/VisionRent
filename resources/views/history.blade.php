@@ -9,7 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 @if ($histories->isEmpty())
-                    <p class="text-center text-gray-600 dark:text-gray-400">Tidak ada barang yang pernah dipinjam.</p>
+                    <div class="text-center">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Tidak ada barang yang pernah dipinjam.</p>
+                        <a href="{{ route('items.index') }}"
+                           class="inline-block bg-red-500 text-white px-6 py-2 rounded-md shadow-md hover:bg-red-400 transition duration-200">
+                            Kunjungi Katalog
+                        </a>
+                    </div>
                 @else
                     <h3 class="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Riwayat Peminjaman Barang</h3>
                     <div class="overflow-x-auto">
@@ -43,6 +49,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="mt-6 text-right">
+                        <a href="{{ route('items.index') }}"
+                           class="bg-blue-500 text-white px-6 py-2 rounded-md shadow-md hover:bg-blue-400 transition duration-200">
+                            Kunjungi Katalog
+                        </a>
                     </div>
                 @endif
             </div>
