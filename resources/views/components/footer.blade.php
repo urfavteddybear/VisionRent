@@ -25,7 +25,8 @@
             <h3 class="text-lg font-semibold mb-4 text-gray-200">Quick Links</h3>
             <ul class="space-y-2">
                 <li><a href="/" class="text-gray-400 hover:text-gray-200 transition">Homepage</a></li>
-                <li><a href="{{ url('/') }}#featured-equipment" class="text-gray-400 hover:text-gray-200 transition">Featured</a></li>
+                <li><a href="/items" class="text-gray-400 hover:text-gray-200 transition">Catalog</a></li>
+                {{-- <li><a href="{{ url('/') }}#featured-equipment" class="text-gray-400 hover:text-gray-200 transition">Featured</a></li> --}}
                 <li><a href="/about" class="text-gray-400 hover:text-gray-200 transition">About Us</a></li>
                 <li><a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="text-gray-400 hover:text-gray-200 transition">Contact Us</a></li>
             </ul>
