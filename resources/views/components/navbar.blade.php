@@ -8,22 +8,22 @@
                 </a>
             </div>
 
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-6">
-                <a href="/" class="hover:text-gray-300 text-lg font-medium {{ request()->is('/') ? 'text-red-500' : '' }}">Home</a>
-                <a href="{{ url('/') }}#featured-equipment" class="hover:text-gray-300 text-lg font-medium">Featured</a>
-                <a href="/about" class="hover:text-gray-300 text-lg font-medium">About Us</a>
-                <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="hover:text-gray-300 text-lg font-medium">Contact Us</a>
+           <!-- Desktop Menu -->
+           <div class="hidden md:flex space-x-6">
+            <a href="/" class="hover:text-gray-300 text-lg font-medium pt-2 {{ request()->is('/') ? 'text-red-500' : '' }}">Home</a>
+            <a href="#featured-equipment" class="hover:text-gray-300 text-lg font-medium pt-2">Featured</a>
+            <a href="/about" class="hover:text-gray-300 text-lg font-medium pt-2 {{ request()->is('about') ? 'text-red-500' : '' }}">About Us</a>
+            <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="hover:text-gray-300 text-lg font-medium pt-2">Contact Us</a>
 
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="bg-red-500 text-white px-6 py-2 rounded-full text-lg font-semibold hover:bg-red-600">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="bg-gray-700 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-600">Login</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="bg-gray-700 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-600">Register</a>
-                    @endif
-                @endauth
-            </div>
+            @auth
+                <a href="{{ url('/dashboard') }}" class="bg-red-500 text-white px-6 py-2 rounded-full text-lg font-semibold hover:bg-red-600">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="bg-gray-700 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-600">Login</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="bg-gray-700 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-600">Register</a>
+                @endif
+            @endauth
+        </div>
 
             <!-- Mobile Menu Button -->
             <button type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none" id="mobile-menu-button">
@@ -43,7 +43,7 @@
         <div class="px-4 pt-4 pb-6 space-y-2">
             <a href="/" class="hover:text-gray-300 text-lg font-semibold {{ request()->is('/') ? 'text-red-500' : '' }}">Home</a>
             <a href="{{ url('/') }}#featured-equipment" class="hover:text-gray-300 text-lg font-semibold {{ request()->is('featured-equipment') ? 'text-red-500' : '' }}">Featured</a>
-            <a href="/about" class="hover:text-gray-300 text-lg font-semibold {{ request()->is('about') ? 'text-red-500' : '' }}">About Us</a>
+            <a href="/about"class="hover:text-gray-300 text-lg font-semibold {{ request()->is('about') ? 'text-red-500' : '' }}">About Us</a>
             <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="hover:text-gray-300 text-lg font-semibold">Contact Us</a>
 
             @auth

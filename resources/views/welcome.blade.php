@@ -322,10 +322,10 @@
                 </div>
             </div>
 
-            <!-- Map -->
+            <!---map--->
             <div class="w-full md:w-1/2 h-96 bg-white shadow-lg rounded-lg overflow-hidden">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.920558788654!2d-122.08385128500032!3d37.38605197983209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb71e8d24a2c5%3A0x40088f7b2e30db4c!2sGoogleplex!5e0!3m2!1sen!2sus!4v1618420645311!5m2!1sen!2sus"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.6955150646155!2d115.21989231525955!3d-8.673439590924735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241257db8a707%3A0x9b637d5e897e819e!2sINSTIKI%20-%20Institut%20Teknologi%20dan%20Bisnis%20Indonesia!5e0!3m2!1sen!2sid!4v1678439201230!5m2!1sen!2sid"
                     width="100%"
                     height="100%"
                     style="border:0;"
@@ -334,6 +334,7 @@
                     referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
             </div>
+
 
             <!-- Right Column -->
             <div class="hidden md:block w-full md:w-1/4 text-center">

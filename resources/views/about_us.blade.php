@@ -58,7 +58,7 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <!-- Image -->
             <div>
-                <img src="{{ asset('images/about-us.jpg') }}" alt="About Us" class="rounded-lg shadow-md">
+                <img src="{{ asset('images/visonrent-monocrhome.png') }}" alt="About Us" class="rounded-lg shadow-md">
             </div>
             <!-- Content -->
             <div>
