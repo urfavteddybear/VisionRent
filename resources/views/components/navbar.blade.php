@@ -18,10 +18,12 @@
             @auth
                 <a href="{{ url('/dashboard') }}" class="bg-red-500 text-white px-6 py-2 rounded-full text-lg font-semibold hover:bg-red-600">Dashboard</a>
             @else
+            <div class="flex space-x-3">
                 <a href="{{ route('login') }}" class="bg-gray-700 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-600">Login</a>
                 @if (Route::has('register'))
                     <a href="{{ route('register') }}" class="bg-gray-700 text-white px-6 py-2 rounded-full text-lg font-medium hover:bg-gray-600">Register</a>
                 @endif
+            </div>
             @endauth
         </div>
 
@@ -41,10 +43,13 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu-enter md:hidden" id="mobile-menu">
         <div class="px-4 pt-4 pb-6 space-y-2">
-            <a href="/" class="hover:text-gray-300 text-lg font-semibold {{ request()->is('/') ? 'text-red-500' : '' }}">Home</a>
-            <a href="{{ url('/') }}#featured-equipment" class="hover:text-gray-300 text-lg font-semibold {{ request()->is('featured-equipment') ? 'text-red-500' : '' }}">Featured</a>
-            <a href="/about"class="hover:text-gray-300 text-lg font-semibold {{ request()->is('about') ? 'text-red-500' : '' }}">About Us</a>
-            <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="hover:text-gray-300 text-lg font-semibold">Contact Us</a>
+            <a href="/" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('/') ? 'text-red-500' : 'text-white' }}">Home</a>
+
+            <a href="{{ url('/') }}#featured-equipment" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('featured-equipment') ? 'text-red-500' : 'text-white' }}">Featured</a>
+
+            <a href="/about" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('about') ? 'text-red-500' : 'text-white' }}">About Us</a>
+
+            <a href="https://wa.me/{{ config('app.whatsapp_number') }}?text=Halo VisionRent" class="block px-3 py-2 rounded-md text-lg font-medium {{ request()->is('contact-us') ? 'text-red-500' : 'text-white' }}">Contact Us</a>
 
             @auth
                 <a href="{{ url('/dashboard') }}" class="block px-3 py-2 bg-red-500 text-white rounded-md text-lg font-medium">Dashboard</a>
@@ -95,3 +100,4 @@
         });
     });
 </script>
+
