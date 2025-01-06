@@ -15,6 +15,7 @@ class Rental extends Model
         'item_id',
         'start_date',
         'end_date',
+        'dp',
         'status', // Status rental (dipinjam/kembali)
     ];
 

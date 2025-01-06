@@ -26,6 +26,10 @@
                         <p class="text-lg font-medium text-gray-800 dark:text-gray-200">{{ $rental->end_date }}</p>
                     </div>
                     <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Uang Muka</p>
+                        <p class="text-lg font-medium text-gray-800 dark:text-gray-200">Rp {{ number_format($rental->dp, 0, ',', '.') }}</p>
+                    </div>
+                    <div>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Status</p>
                         <p class="text-lg font-medium text-gray-800 dark:text-gray-200">
                             {{ $rental->status === 'rented' ? 'Dipinjam' : 'Dikembalikan' }}

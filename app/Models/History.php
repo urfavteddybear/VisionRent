@@ -16,6 +16,7 @@ class History extends Model
         'end_date',
         'return_date',
         'status',
+        'dp',
         'penalty_total',
         'total_cost', // Add this to store the calculated total cost
     ];
@@ -23,6 +24,7 @@ class History extends Model
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',
+        'return_date' => 'date',
     ];
 
     public function user()
