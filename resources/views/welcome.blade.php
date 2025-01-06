@@ -44,63 +44,139 @@
 <body class="bg-gray-100">
     @include('components.navbar')
 
-   
+
 
     <div class="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
-        <!-- Banner image -->
+        <!-- Banner Image -->
         <div class="absolute inset-0">
             <img
                 src="{{ asset('images/visionrent-banner.jpg') }}"
                 alt="Camera Equipment"
                 class="w-full h-full object-cover"
             >
-            <!-- Dark overlay -->
-            <div class="absolute inset-0 bg-black/50"></div>
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
 
-        <!-- Banner content -->
-        <div class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-start">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+        <!-- Banner Content -->
+        <div class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-start space-y-4">
+            <!-- Main Heading -->
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight drop-shadow-lg">
                 Professional Camera Equipment Rental
             </h1>
-            <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
-                High-quality cameras, lenses, and accessories for your creative projects
+
+            <!-- Subheading -->
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed drop-shadow-md">
+                High-quality cameras, lenses, and accessories for your creative projects.
             </p>
 
-            <a href="#featured-equipment" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 transition-colors duration-200 text-lg font-semibold">
-
+            <!-- CTA Button -->
+            <a href="#featured-equipment" class="bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-red-500 transition-all duration-200 text-lg font-semibold tracking-wide">
                 Browse Equipment
             </a>
         </div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-red-600 rounded-full blur-3xl opacity-30"></div>
+        <div class="absolute top-0 right-0 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-30"></div>
     </div>
 
-    <div class="h-16 bg-gray-800"></div>
+    <div class="h-10 bg-gray-800"></div>
 
-    <section class="py-12 px-4 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Create With Us</h2>
-            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
-                Take your creative projects to the next level with our premium rental services and reliable support.
-            </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-lg shadow-md p-6 transform hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('images/creative-gear.jpg') }}" alt="Creative Gear" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-bold mb-2">Creative Gear</h3>
-                    <p class="text-gray-600">Access the latest cameras, lenses, lighting, and audio equipment.</p>
+
+   <!-- Create with us section -->
+<section class="py-12 px-4 relative bg-cover bg-center" style="background-image: url('{{ asset('images/fotografi.jpg') }}');">
+    <div class="absolute inset-0 bg-gray-900/70"></div> <!-- Overlay yang lebih gelap -->
+    <div class="relative max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold text-center text-white mb-8">
+            Create With Us
+        </h2>
+        <p class="text-center text-gray-300 mb-8 max-w-2xl mx-auto">
+            Take your creative projects to the next level with our premium rental services and reliable support.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            <div class="group relative rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <img src="{{ asset('images/kreatife_gear.jpeg') }}" alt="Creative Gear" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white text-2xl font-bold">Creative Gear</h3>
+                    <p class="text-gray-200 mt-2">Access the latest cameras, lenses, lighting, and audio equipment.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-6 transform hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('images/collaboration.jpg') }}" alt="Collaboration" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-bold mb-2">Seamless Collaboration</h3>
-                    <p class="text-gray-600">Collaborate with our expert team to ensure your shoot goes smoothly.</p>
+            </div>
+            <div class="group relative rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <img src="{{ asset('images/collab.jpeg') }}" alt="Collaboration" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white text-2xl font-bold">Seamless Collaboration</h3>
+                    <p class="text-gray-200 mt-2">Collaborate with our expert team to ensure your shoot goes smoothly.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-6 transform hover:scale-105 transition-transform duration-300">
-                    <img src="{{ asset('images/easy-rentals.jpg') }}" alt="Easy Rentals" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <h3 class="text-xl font-bold mb-2">Easy Rentals</h3>
-                    <p class="text-gray-600">Enjoy a hassle-free rental experience with our simple booking process.</p>
+            </div>
+            <div class="group relative rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <img src="{{ asset('images/easyrent.webp') }}" alt="Easy Rentals" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white text-2xl font-bold">Easy Rentals</h3>
+                    <p class="text-gray-200 mt-2">Enjoy a hassle-free rental experience with our simple booking process.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+<!-- Our Features -->
+<section class="py-12 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-3xl font-bold">Awesome Feature</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
+                <div class="flex items-center space-x-4 mb-4">
+                    <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2m0-4v12m-3.09 0a9.003 9.003 0 01-6.92-8.69V12c0-5.45 4.55-9.8 10.21-9.97C19.38 2.18 24 6.72 24 12v.31c0 4.97-4.16 9.19-9.09 9.69M12 18a6 6 0 006-6v-2a6 6 0 00-12 0v2c0 3.3 2.7 6 6 6z" />
+                    </svg>
+                    <h3 class="text-lg font-semibold">Mudah & Fleksibel</h3>
+                </div>
+                <p class="text-gray-600">
+                    Identitas di luar daerah? tidak jadi masalah. Mau sewa mendadak hari ini tapi belum terdaftar? Bisa.
+                    Mau sewa tanpa meninggalkan jaminan apapun? Bisa banget!
+                </p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
+                <div class="flex items-center space-x-4 mb-4">
+                    <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12v-2a6 6 0 0112 0v2a6 6 0 01-12 0zm-4 6a8.1 8.1 0 0016 0v-2M8 14a8.1 8.1 0 0116 0" />
+                    </svg>
+                    <h3 class="text-lg font-semibold">Stok Realtime</h3>
+                </div>
+                <p class="text-gray-600">
+                    Tidak perlu antri menunggu jawaban CS untuk cek ketersediaan produk. Cukup masukkan tanggal tujuanmu, langsung tahu stok alat realtime.
+                </p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
+                <div class="flex items-center space-x-4 mb-4">
+                    <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 4H4v16h16V8m-6 0H4v16m4-6h10" />
+                    </svg>
+                    <h3 class="text-lg font-semibold">Cepat & Praktis</h3>
+                </div>
+                <p class="text-gray-600">
+                    Booking online 24 jam, pengambilan & pengembalian alat 24 jam. Pembayaran instan dan notifikasi otomatis via WhatsApp.
+                </p>
+            </div>
+            <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
+                <div class="flex items-center space-x-4 mb-4">
+                    <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18c1.1 0 2-.9 2-2m0-6v6m0 2c-1.1 0-2-.9-2-2m-3.09 0a9.003 9.003 0 01-6.92-8.69V12m6.09-6v4M10.1 14a5.997 5.997 0 01-3.19 1H4v-2m4 2h6" />
+                    </svg>
+                    <h3 class="text-lg font-semibold">Berpengalaman & Handal</h3>
+                </div>
+                <p class="text-gray-600">
+                    Dengan pengalaman belasan tahun di industri foto dan video, kami akan menjadi rekan yang memahami kebutuhan kamu dengan baik.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <!--promotion--->
 <section class="py-12 px-4 bg-white">
@@ -227,29 +303,6 @@
     </div>
 </section>
 
-<!-- Our Features -->
-<section class="py-12 px-4 bg-gray-800">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-center text-white mb-8">Why Choose Vision Rent?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="text-center p-6 bg-gray-100 rounded-lg shadow transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Wide Selection</h3>
-                <p class="text-gray-600">Access top-notch cameras, lenses, and accessories.</p>
-            </div>
-            <div class="text-center p-6 bg-gray-100 rounded-lg shadow transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Affordable Pricing</h3>
-                <p class="text-gray-600">High-quality equipment at the best rates.</p>
-            </div>
-            <div class="text-center p-6 bg-gray-100 rounded-lg shadow transform hover:scale-105 transition-transform duration-300">
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Trusted by Professionals</h3>
-                <p class="text-gray-600">Join thousands of satisfied photographers and videographers.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
 <!-- Our Location -->
 <section class="py-12 px-4 bg-slate-100">
     <div class="max-w-7xl mx-auto">
@@ -297,48 +350,45 @@
 </section>
 
 
+<!-- Testimonials Section -->
+<section class="py-12 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto text-center">
+        <!-- Title -->
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">You're in Good Company</h2>
+        <p class="text-gray-500 text-lg mb-8">Trusted by 10k+ Photographers & Videographers</p>
+    </div>
 
-     <!-- Trusted Photographers Reviews -->
-     <section class="py-12 px-4 bg-gray-800 text-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Trusted Photographers Say</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-gray-700 p-4 rounded-lg shadow-md">
-                    <h3 class="text-lg font-bold">John Doe</h3>
-                    <p class="text-sm mb-2">"Great service and excellent equipment!"</p>
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                    </div>
-                </div>
-                <div class="bg-gray-700 p-4 rounded-lg shadow-md">
-                    <h3 class="text-lg font-bold">Jane Smith</h3>
-                    <p class="text-sm mb-2">"Affordable and reliable! Highly recommend."</p>
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                    </div>
-                </div>
-                <div class="bg-gray-700 p-4 rounded-lg shadow-md">
-                    <h3 class="text-lg font-bold">Michael Brown</h3>
-                    <p class="text-sm mb-2">"Excellent customer service and great variety!"</p>
-                    <div class="flex items-center">
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-yellow-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                        <svg class="w-4 h-4 fill-current text-gray-500" viewBox="0 0 20 20"><path d="M10 15l-5.39 2.82L6.7 12.65l-4.15-4.04 5.42-.79L10 2l2.03 5.81 5.42.79-4.15 4.04 1.09 5.17z" /></svg>
-                    </div>
-                </div>
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6">
+            <img src="{{ asset('images/customer1.jpeg') }}" alt="Alex Johnson" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h3 class="text-xl font-bold text-gray-800">Alex Johnson</h3>
+            <p class="text-gray-600 mt-2 text-sm">
+                "The equipment was top-notch, and the service was beyond my expectations! I will definitely come back for my next project."
+            </p>
         </div>
-    </section>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6">
+            <img src="{{ asset('images/customer2.jpg') }}" alt="Maria Gonzales" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h3 class="text-xl font-bold text-gray-800">Maria Gonzales</h3>
+            <p class="text-gray-600 mt-2 text-sm">
+                "Affordable pricing and an extensive selection of gear. The team was very helpful throughout the process!"
+            </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden text-center p-6">
+            <img src="{{ asset('images/customer3.jpeg') }}" alt="David Lee" class="w-24 h-24 rounded-full mx-auto mb-4">
+            <h3 class="text-xl font-bold text-gray-800">David Lee</h3>
+            <p class="text-gray-600 mt-2 text-sm">
+                "I've rented equipment multiple times, and the experience is always fantastic. Highly recommend their service!"
+            </p>
+        </div>
+    </div>
+</section>
+
+
 
     <!-- Our Brands -->
     <section class="py-8 px-4 bg-white">
