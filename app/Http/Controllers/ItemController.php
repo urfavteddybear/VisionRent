@@ -13,14 +13,24 @@ class ItemController extends Controller
     {
         $categories = Category::all();
         $selectedCategory = $request->query('category');
+        $searchTerm = $request->query('search');
 
         $items = Item::with('category')
+            // Apply search filter if search term exists
+            ->when($searchTerm, function ($query) use ($searchTerm) {
+                return $query->where(function($q) use ($searchTerm) {
+                    $q->where('name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%');
+                });
+            })
+            // Apply category filter if category is selected
             ->when($selectedCategory, function ($query) use ($selectedCategory) {
                 return $query->where('category_id', $selectedCategory);
             })
             ->latest()
             ->paginate(12);
 
+        // Transform the items to include image URLs
         $items->getCollection()->transform(function ($item) {
             $item->imageUrl = isset($item->picture[0]) ? Storage::url($item->picture[0]) : null;
             return $item;
