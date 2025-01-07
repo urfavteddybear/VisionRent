@@ -186,7 +186,7 @@
                                 <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
                                 <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
                                 <a href="{{ route('item.show', $equipment['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">
-                                    View More
+                                    View Details
                                 </a>
                             </div>
                         </div>
@@ -242,7 +242,7 @@
                     <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
                     <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
                     <a href="{{ route('item.show', $equipment['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">
-                        View More
+                        View Details
                     </a>
                 </div>
             </div>
@@ -262,7 +262,7 @@
                 <div class="p-4">
                     <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
                     <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
-                    <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
+                    <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View Details</a>
                 </div>
             </div>
             @endforeach
@@ -284,7 +284,7 @@
                 <div class="p-4">
                     <h3 class="text-lg font-semibold">{{ $item['name'] }}</h3>
                     <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
-                    <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View More</a>
+                    <a href="{{ route('item.show', $item['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">View Details</a>
                 </div>
             </div>
             @endforeach
