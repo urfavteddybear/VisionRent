@@ -134,8 +134,7 @@
                     <h3 class="text-lg font-semibold">Mudah & Fleksibel</h3>
                 </div>
                 <p class="text-gray-600">
-                    Identitas di luar daerah? tidak jadi masalah. Mau sewa mendadak hari ini tapi belum terdaftar? Bisa.
-                    Mau sewa tanpa meninggalkan jaminan apapun? Bisa banget!
+                    Identitas di luar daerah? tidak jadi masalah. Mau sewa mendadak hari ini tapi belum terdaftar? Bisa banget.
                 </p>
             </div>
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
@@ -144,7 +143,7 @@
                     <h3 class="text-lg font-semibold">Stok Realtime</h3>
                 </div>
                 <p class="text-gray-600">
-                    Tidak perlu antri menunggu jawaban CS untuk cek ketersediaan produk. Cukup masukkan tanggal tujuanmu, langsung tahu stok alat realtime.
+                    Tidak perlu antri menunggu jawaban CS untuk cek ketersediaan produk. Cukup masuk ke halaman detail, langsung tahu stok alat realtime.
                 </p>
             </div>
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
@@ -153,7 +152,7 @@
                     <h3 class="text-lg font-semibold">Cepat & Praktis</h3>
                 </div>
                 <p class="text-gray-600">
-                    Booking online 24 jam, pengambilan & pengembalian alat 24 jam. Pembayaran instan dan notifikasi otomatis via WhatsApp.
+                    Booking online 24 jam, pengambilan & pengembalian alat 24 jam, serta support kilat via WhatsApp.
                 </p>
             </div>
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
@@ -164,35 +163,6 @@
                 <p class="text-gray-600">
                     Dengan pengalaman belasan tahun di industri foto dan video, kami akan menjadi rekan yang memahami kebutuhan kamu dengan baik.
                 </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<!--promotion--->
-<section class="py-12 px-4 bg-white">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-8">On Promotion</h2>
-        <div class="relative">
-            <!-- Carousel Container -->
-            <div class="overflow-hidden group">
-                <div class="flex transition-transform duration-300 ease-in-out cursor-grab" id="carousel" style="transform: translateX(0);">
-                    @foreach($featuredEquipment as $equipment)
-                    <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 flex-shrink-0 p-4">
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                            <img src="{{ $equipment['image'] }}" alt="{{ $equipment['name'] }}" class="w-full h-48 object-cover">
-                            <div class="p-4">
-                                <h3 class="text-lg font-semibold">{{ $equipment['name'] }}</h3>
-                                <p class="text-sm font-semibold text-gray-600">Rp {{ number_format($equipment['price'], 0, ',', '.') }}</p>
-                                <a href="{{ route('item.show', $equipment['id']) }}" class="mt-4 inline-block bg-gray-800 text-white px-4 py-2 rounded-md text-sm hover:bg-gray-700">
-                                    View Details
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
             </div>
         </div>
     </div>
