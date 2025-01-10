@@ -131,37 +131,37 @@
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
                 <div class="flex items-center space-x-4 mb-4">
                     <svg class="w-8 h-8 text-gray-700" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 122.76" style="enable-background:new 0 0 122.88 122.76" xml:space="preserve"><g><path d="M114.89,89.82c0-2.21,1.79-4,4-4c2.21,0,4,1.79,4,4v28.75c0,2.21-1.79,4-4,4H89.67c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4 h19.18L74.49,82.09c-1.6-1.51-1.68-4.03-0.17-5.64c1.51-1.6,4.03-1.68,5.64-0.17l34.93,33.02V89.82L114.89,89.82z M89.82,7.99 c-2.21,0-4-1.79-4-4c0-2.21,1.79-4,4-4h28.75c2.21,0,4,1.79,4,4v29.21c0,2.21-1.79,4-4,4c-2.21,0-4-1.79-4-4V14.03L82.09,48.39 c-1.51,1.6-4.03,1.68-5.64,0.17c-1.6-1.51-1.68-4.03-0.17-5.64L109.3,7.99H89.82L89.82,7.99z M7.99,32.76c0,2.21-1.79,4-4,4 c-2.21,0-4-1.79-4-4V4.01c0-2.21,1.79-4,4-4h29.21c2.21,0,4,1.79,4,4c0,2.21-1.79,4-4,4H14.03l34.36,32.48 c1.6,1.51,1.68,4.03,0.17,5.64c-1.51,1.6-4.03,1.68-5.64,0.17L7.99,13.28V32.76L7.99,32.76z M32.94,114.77c2.21,0,4,1.79,4,4 c0,2.21-1.79,4-4,4H4.19c-2.21,0-4-1.79-4-4V89.55c0-2.21,1.79-4,4-4c2.21,0,4,1.79,4,4v19.18l32.48-34.36 c1.51-1.6,4.03-1.68,5.64-0.17c1.6,1.51,1.68,4.03,0.17,5.64l-33.02,34.93H32.94L32.94,114.77z"/></g></svg>
-                    <h3 class="text-lg font-semibold">Mudah & Fleksibel</h3>
+                    <h3 class="text-lg font-semibold">Easy & Flexible</h3>
                 </div>
                 <p class="text-gray-600">
-                    Identitas di luar daerah? tidak jadi masalah. Mau sewa mendadak hari ini tapi belum terdaftar? Bisa banget.
+                    Out-of-town ID? Not a problem. Need to rent something last minute today but haven’t registered yet? No worries, you absolutely can.
                 </p>
             </div>
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
                 <div class="flex items-center space-x-4 mb-4">
                     <svg class="w-8 h-8 text-gray-700" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 513.11"><path fill-rule="nonzero" d="M210.48 160.8c0-14.61 11.84-26.46 26.45-26.46s26.45 11.85 26.45 26.46v110.88l73.34 32.24c13.36 5.88 19.42 21.47 13.54 34.82-5.88 13.35-21.47 19.41-34.82 13.54l-87.8-38.6c-10.03-3.76-17.16-13.43-17.16-24.77V160.8zM5.4 168.54c-.76-2.25-1.23-4.64-1.36-7.13l-4-73.49c-.75-14.55 10.45-26.95 25-27.69 14.55-.75 26.95 10.45 27.69 25l.74 13.6a254.258 254.258 0 0136.81-38.32c17.97-15.16 38.38-28.09 61.01-38.18 64.67-28.85 134.85-28.78 196.02-5.35 60.55 23.2 112.36 69.27 141.4 132.83.77 1.38 1.42 2.84 1.94 4.36 27.86 64.06 27.53 133.33 4.37 193.81-23.2 60.55-69.27 112.36-132.83 141.39a26.24 26.24 0 01-12.89 3.35c-14.61 0-26.45-11.84-26.45-26.45 0-11.5 7.34-21.28 17.59-24.92 7.69-3.53 15.06-7.47 22.09-11.8.8-.66 1.65-1.28 2.55-1.86 11.33-7.32 22.1-15.7 31.84-25.04.64-.61 1.31-1.19 2-1.72 20.66-20.5 36.48-45.06 46.71-71.76 18.66-48.7 18.77-104.46-4.1-155.72l-.01-.03C418.65 122.16 377.13 85 328.5 66.37c-48.7-18.65-104.46-18.76-155.72 4.1a203.616 203.616 0 00-48.4 30.33c-9.86 8.32-18.8 17.46-26.75 27.29l3.45-.43c14.49-1.77 27.68 8.55 29.45 23.04 1.77 14.49-8.55 27.68-23.04 29.45l-73.06 9c-13.66 1.66-26.16-7.41-29.03-20.61zM283.49 511.5c20.88-2.34 30.84-26.93 17.46-43.16-5.71-6.93-14.39-10.34-23.29-9.42-15.56 1.75-31.13 1.72-46.68-.13-9.34-1.11-18.45 2.72-24.19 10.17-12.36 16.43-2.55 39.77 17.82 42.35 19.58 2.34 39.28 2.39 58.88.19zm-168.74-40.67c7.92 5.26 17.77 5.86 26.32 1.74 18.29-9.06 19.97-34.41 3.01-45.76-12.81-8.45-25.14-18.96-35.61-30.16-9.58-10.2-25.28-11.25-36.11-2.39a26.436 26.436 0 00-2.55 38.5c13.34 14.2 28.66 27.34 44.94 38.07zM10.93 331.97c2.92 9.44 10.72 16.32 20.41 18.18 19.54 3.63 36.01-14.84 30.13-33.82-4.66-15-7.49-30.26-8.64-45.93-1.36-18.33-20.21-29.62-37.06-22.33C5.5 252.72-.69 262.86.06 274.14c1.42 19.66 5.02 39 10.87 57.83z"/></svg>
-                    <h3 class="text-lg font-semibold">Stok Realtime</h3>
+                    <h3 class="text-lg font-semibold">Real-Time Stock</h3>
                 </div>
                 <p class="text-gray-600">
-                    Tidak perlu antri menunggu jawaban CS untuk cek ketersediaan produk. Cukup masuk ke halaman detail, langsung tahu stok alat realtime.
+                    No need to queue up waiting for a customer service response to check product availability. Simply go to the detail page, and you'll instantly know the real-time stock of the equipment.
                 </p>
             </div>
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
                 <div class="flex items-center space-x-4 mb-4">
                     <svg class="w-8 h-8 text-gray-700" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 81.83 122.88" style="enable-background:new 0 0 81.83 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><polygon class="st0" points="33.05,63.12 0,60.01 27.4,0 64.86,0 43.62,34.43 81.83,38.66 11.69,122.88 33.05,63.12"/></g></svg>
-                    <h3 class="text-lg font-semibold">Cepat & Praktis</h3>
+                    <h3 class="text-lg font-semibold">Fast & Practical</h3>
                 </div>
                 <p class="text-gray-600">
-                    Booking online 24 jam, pengambilan & pengembalian alat 24 jam, serta support kilat via WhatsApp.
+                    Book online 24/7, enjoy 24/7 equipment pickup and return, and get quick support via WhatsApp.
                 </p>
             </div>
             <div class="p-6 bg-white rounded-lg shadow-md border hover:shadow-lg transform transition duration-300">
                 <div class="flex items-center space-x-4 mb-4">
                     <svg class="w-8 h-8 text-gray-700" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="111.811px" height="122.88px" viewBox="0 0 111.811 122.88" enable-background="new 0 0 111.811 122.88" xml:space="preserve"><g><path fill-rule="evenodd" clip-rule="evenodd" d="M55.713,0c20.848,13.215,39.682,19.467,55.846,17.989 c2.823,57.098-18.263,90.818-55.63,104.891C19.844,109.708-1.5,77.439,0.083,17.123C19.058,18.116,37.674,14.014,55.713,0L55.713,0 z M33.784,66.775c-1.18-1.01-1.318-2.786-0.309-3.967c1.011-1.181,2.787-1.318,3.967-0.309l11.494,9.875l25.18-27.684 c1.047-1.15,2.828-1.234,3.979-0.188c1.149,1.046,1.233,2.827,0.187,3.978L51.262,78.188l-0.002-0.002 c-1.02,1.121-2.751,1.236-3.91,0.244L33.784,66.775L33.784,66.775z M55.735,7.055c18.454,11.697,35.126,17.232,49.434,15.923 c2.498,50.541-16.166,80.39-49.241,92.846C23.986,104.165,5.091,75.603,6.493,22.211C23.29,23.091,39.768,19.46,55.735,7.055 L55.735,7.055z"/></g></svg>
-                    <h3 class="text-lg font-semibold">Berpengalaman & Handal</h3>
+                    <h3 class="text-lg font-semibold">Experienced & Reliable</h3>
                 </div>
                 <p class="text-gray-600">
-                    Dengan pengalaman belasan tahun di industri foto dan video, kami akan menjadi rekan yang memahami kebutuhan kamu dengan baik.
+                    With over a decade of experience in the photo and video industry, we are your trusted partner who understands your needs perfectly.
                 </p>
             </div>
         </div>

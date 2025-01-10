@@ -83,16 +83,16 @@
                 <!-- Product Info -->
                 <div class="space-y-3">
                     <div class="flex items-center">
-                        <span class="w-36 text-gray-600 font-medium">Min. Pemesanan:</span>
-                        <span class="text-gray-900">1 Buah</span>
+                        <span class="w-36 text-gray-600 font-medium">Minimum Order:</span>
+                        <span class="text-gray-900">1 Piece</span>
                     </div>
                     <div class="flex items-center">
-                        <span class="w-36 text-gray-600 font-medium">Kategori:</span>
+                        <span class="w-36 text-gray-600 font-medium">Category:</span>
                         <span class="text-gray-900">{{ $item->category->name }}</span>
                     </div>
                     <div class="flex items-center">
-                        <span class="w-36 text-gray-600 font-medium">Stok:</span>
-                        <span class="text-gray-900">{{ $item->stock }} unit</span>
+                        <span class="w-36 text-gray-600 font-medium">Stock:</span>
+                        <span class="text-gray-900">{{ $item->stock }} units</span>
                     </div>
                 </div>
 
