@@ -5,6 +5,26 @@
         </h2>
     </x-slot>
 
+    @if (auth()->user()->needsVerification())
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+                <p class="font-bold">Verifikasi Data Diperlukan</p>
+                <p>Untuk dapat menggunakan layanan kami sepenuhnya, silakan lengkapi data diri Anda.
+                    <a href="{{ route('verification.form') }}" class="underline font-semibold">Klik di sini untuk verifikasi</a>
+                </p>
+            </div>
+        </div>
+    @endif
+
+    @if (auth()->user()->isPending())
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4" role="alert">
+                <p class="font-bold">Verifikasi Sedang Diproses</p>
+                <p>Data verifikasi Anda sedang dalam proses review oleh admin. Kami akan mengirimkan email setelah proses selesai.</p>
+            </div>
+        </div>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -44,7 +64,7 @@
                         </table>
                     </div>
                 @endif
-                
+
             </div>
         </div>
     </div>
