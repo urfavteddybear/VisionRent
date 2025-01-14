@@ -2,13 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\RentalResource\Pages;
-use App\Models\Rental;
-use App\Models\History; // Import History model
 use Filament\Forms;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Rental;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Builder;
+use App\Models\History;
+use App\Filament\Resources\RentalResource\Pages;
 
 class RentalResource extends Resource
 {
@@ -22,13 +27,13 @@ class RentalResource extends Resource
         return $form->schema([
             Forms\Components\Select::make('user_id')
                 ->label('Pelanggan')
-                ->relationship('user', 'email') // Menggunakan email untuk dropdown
+                ->relationship('user', 'email')
                 ->searchable()
                 ->required(),
 
             Forms\Components\Select::make('item_id')
                 ->label('Barang')
-                ->relationship('item', 'name') // Menggunakan nama item
+                ->relationship('item', 'name')
                 ->searchable()
                 ->required(),
 
@@ -39,84 +44,143 @@ class RentalResource extends Resource
             Forms\Components\DatePicker::make('end_date')
                 ->label('Tanggal Selesai')
                 ->required(),
+
+
+            Forms\Components\TextInput::make('dp')
+                ->label('Uang Muka')
+                ->prefix('Rp')
+                ->extraAttributes(['min' => 0])
+                ->required(),
         ]);
     }
 
     public static function table(Tables\Table $table): Tables\Table
     {
-        return $table->columns([
-            Tables\Columns\TextColumn::make('user.email')
-                ->label('Pelanggan')
-                ->sortable()
-                ->searchable(),
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('Pelanggan')
+                    ->sortable()
+                    ->searchable(),
 
-            Tables\Columns\TextColumn::make('item.name')
-                ->label('Barang')
-                ->sortable(),
+                Tables\Columns\TextColumn::make('item.name')
+                    ->label('Barang')
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('start_date')
-                ->label('Tanggal Mulai')
-                ->sortable(),
+                Tables\Columns\TextColumn::make('start_date')
+                    ->label('Tanggal Mulai')
+                    ->sortable(),
 
-            Tables\Columns\TextColumn::make('end_date')
-                ->label('Tanggal Selesai')
-                ->sortable(),
-        ])
-        ->actions([
-            Tables\Actions\Action::make('return') // Action for "Barang Dikembalikan"
-                ->label('Barang Dikembalikan')
-                ->action(function (Rental $record) {
-                    if ($record->status === 'returned') {
-                        $this->notify('warning', 'Barang sudah dikembalikan sebelumnya.');
-                        return;
-                    }
+                Tables\Columns\TextColumn::make('end_date')
+                    ->label('Tanggal Selesai')
+                    ->sortable(),
 
-                    // Calculate the overdue days if applicable
-                    $returnDate = now();
-                    $overdueDays = $returnDate->greaterThan($record->end_date)
-                        ? $returnDate->diffInDays($record->end_date)
-                        : 0;
+                Tables\Columns\TextColumn::make('dp')
+                ->label('Uang Muka')
+                ->money('IDR', true),
+            ])
+            ->actions([
+                Tables\Actions\Action::make('return')
+                    ->label('Barang Dikembalikan')
+                    ->action(function (Rental $record) {
+                        if ($record->status === 'returned') {
+                            Notification::make()
+                                ->warning()
+                                ->title('Barang sudah dikembalikan sebelumnya.')
+                                ->send();
+                            return;
+                        }
 
-                    // Calculate penalty percentage
-                    $penaltyPercent = $record->item->penalty_percent ?? 0;
+                        $returnDate = now();
+                        $overdueDays = $returnDate->greaterThan($record->end_date)
+                            ? $returnDate->diffInDays($record->end_date)
+                            : 0;
 
-                    // Calculate penalty total
-                    $penaltyTotal = $overdueDays * ($record->item->price * $penaltyPercent / 100);
+                        $penaltyPercent = $record->item->penalty_percent ?? 0;
+                        $penaltyTotal = $overdueDays * ($record->item->price * $penaltyPercent / 100);
+                        $rentalDays = $record->start_date->diffInDays($record->end_date);
+                        $totalCost = ($rentalDays * $record->item->price) + $penaltyTotal;
 
-                    // Calculate rental duration in days
-                    $rentalDays = $record->start_date->diffInDays($record->end_date);
+                        History::create([
+                            'user_id' => $record->user_id,
+                            'item_id' => $record->item_id,
+                            'start_date' => $record->start_date,
+                            'end_date' => $record->end_date,
+                            'return_date' => $returnDate,
+                            'status' => 'returned',
+                            'dp'=> $record->dp,
+                            'penalty_total' => $penaltyTotal,
+                            'total_cost' => $totalCost,
+                        ]);
 
-                    // Calculate the total cost of the rental (price * rental days + penalty)
-                    $totalCost = ($rentalDays * $record->item->price) + $penaltyTotal;
+                        $record->item->increment('stock');
+                        $record->delete();
 
-                    // Create a History entry
-                    History::create([
-                        'user_id' => $record->user_id,
-                        'item_id' => $record->item_id,
-                        'start_date' => $record->start_date,
-                        'end_date' => $record->end_date,
-                        'return_date' => $returnDate,
-                        'status' => 'returned',
-                        'penalty_total' => $penaltyTotal,
-                        'total_cost' => $totalCost,  // Save total cost here
-                    ]);
+                        Notification::make()
+                            ->success()
+                            ->title('Barang berhasil dikembalikan')
+                            ->send();
+                    })
+                    ->color('success')
+                    ->visible(fn (Rental $record) => $record->status === 'rented'),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkAction::make('generateInvoices')
+                    ->label('Generate Invoices')
+                    ->action(function (Collection $records) {
+                        try {
+                            $directory = 'invoices';
+                            if (!Storage::exists($directory)) {
+                                Storage::makeDirectory($directory);
+                            }
 
-                    // Increment stock of the item
-                    $record->item->increment('stock');
+                            $groupedRentals = $records->groupBy('user_id');
 
-                    // Delete rental record
-                    $record->delete();
+                            foreach ($groupedRentals as $userId => $userRentals) {
+                                $user = $userRentals->first()->user;
 
-                    // Notify success
-                    // $this->notify('success', 'Barang berhasil dikembalikan, dipindahkan ke riwayat, dan stok diperbarui.');
-                })
-                ->color('success')
-                ->visible(fn (Rental $record) => $record->status === 'rented'),
-        ]);
+                                $pdf = Pdf::loadView('invoices.rental', [
+                                    'rentals' => $userRentals,
+                                    'user' => $user,
+                                    'totalAmount' => $userRentals->sum(function ($rental) {
+                                        return $rental->item->price * $rental->start_date->diffInDays($rental->end_date);
+                                    }),
+                                ]);
+
+                                $filename = "invoice-{$userId}-" . time() . ".pdf";
+                                $filePath = Storage::path($directory . '/' . $filename);
+
+                                $pdf->save($filePath);
+
+                                Mail::send('emails.invoice', ['user' => $user], function ($message) use ($user, $filePath) {
+                                    $message->to($user->email)
+                                        ->subject('Invoice Rental')
+                                        ->attach($filePath);
+                                });
+
+                                if (file_exists($filePath)) {
+                                    unlink($filePath);
+                                }
+                            }
+
+                            Notification::make()
+                                ->success()
+                                ->title('Invoice berhasil dibuat dan dikirim')
+                                ->send();
+
+                        } catch (\Exception $e) {
+                            Notification::make()
+                                ->danger()
+                                ->title('Error membuat invoice')
+                                ->body($e->getMessage())
+                                ->send();
+                        }
+                    })
+                    ->deselectRecordsAfterCompletion()
+                    ->color('success')
+                    ->icon('heroicon-o-document-text')
+            ]);
     }
-
-
-
 
     public static function getRelations(): array
     {
