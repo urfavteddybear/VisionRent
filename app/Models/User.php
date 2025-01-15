@@ -37,11 +37,25 @@ class User extends Authenticatable
 
     public function needsVerification(): bool
     {
-        return $this->verification_status === 'unverified' && $this->role === 'customer';
+        return ($this->verification_status === 'unverified')
+            && $this->role === 'customer';
     }
 
     public function isPending(): bool
     {
         return $this->verification_status === 'pending';
+    }
+
+    public function canResubmit(): bool
+    {
+        return $this->verification_status === 'rejected';
+    }
+
+    public function resetVerificationStatus(): void
+    {
+        $this->update([
+            'verification_status' => 'pending',
+            'rejection_reason' => null
+        ]);
     }
 }

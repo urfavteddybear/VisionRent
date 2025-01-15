@@ -42,10 +42,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
     Route::get('/history', [DashboardController::class, 'showHistory'])->name('history');
+
     Route::get('/verification', [VerificationController::class, 'showForm'])
         ->name('verification.form');
     Route::post('/verification', [VerificationController::class, 'submit'])
         ->name('verification.submit');
+
+    Route::get('/verification/resubmit', [VerificationController::class, 'showResubmitForm'])
+        ->name('verification.resubmit');
+    Route::post('/verification/resubmit', [VerificationController::class, 'resubmit'])
+        ->name('verification.resubmit.submit');
 
 });
 
