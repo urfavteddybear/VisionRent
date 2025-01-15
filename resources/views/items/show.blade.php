@@ -38,6 +38,24 @@
             scroll-behavior: smooth;
         }
 
+        .modal-enter {
+        opacity: 0;
+        transform: translateY(-10px);
+        }
+        .modal-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 300ms, transform 300ms;
+        }
+        .modal-exit {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .modal-exit-active {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 300ms, transform 300ms;
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen bg-white">
@@ -126,15 +144,106 @@
                     </a>
                     @endauth
                 </div>
+                <button
+                    onclick="showAvailability()"
+                    class="inline-flex items-center justify-center bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition mt-4"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                    </svg>
+                    Cek Ketersediaan
+                </button>
             </div>
         </div>
     </div>
+                <!-- Modal -->
+                <div id="availabilityModal" style="display: none;" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+                    <div class="modal-container relative top-20 mx-auto p-5 border w-[400px] shadow-lg rounded-md bg-white">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-medium">Ketersediaan {{ $item->name }}</h3>
+                            <button onclick="closeModal()" class="text-gray-400 hover:text-gray-500">
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="modalContent" class="mt-4">
+                            <!-- Content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
 </main>
     @include('components.footer')
-
     <script>
         function changeMainImage(src) {
             document.getElementById('mainImage').src = src;
+        }
+        let currentMonth = new Date().getMonth() + 1;
+        let currentYear = new Date().getFullYear();
+
+        function changeMonth(delta) {
+            const newDate = new Date(currentYear, currentMonth - 1 + delta, 1);
+            currentMonth = newDate.getMonth() + 1;
+            currentYear = newDate.getFullYear();
+            loadAvailability();
+        }
+
+        async function loadAvailability() {
+            const modalContent = document.getElementById('modalContent');
+
+            try {
+                const response = await fetch(`{{ route("items.check-availability", $item) }}?month=${currentMonth}&year=${currentYear}`);
+                const html = await response.text();
+                modalContent.innerHTML = html;
+            } catch (error) {
+                console.error('Error:', error);
+                modalContent.innerHTML = '<p class="text-red-500">Terjadi kesalahan saat memuat data</p>';
+            }
+        }
+
+        function showAvailability() {
+            const modal = document.getElementById('availabilityModal');
+            const modalContent = document.getElementById('modalContent');
+
+            if (!modal || !modalContent) {
+                console.error('Modal elements not found');
+                return;
+            }
+
+            modal.style.display = 'block';
+            modal.querySelector('.modal-container').classList.add('modal-enter');
+
+            requestAnimationFrame(() => {
+                modal.querySelector('.modal-container').classList.remove('modal-enter');
+                modal.querySelector('.modal-container').classList.add('modal-enter-active');
+            });
+
+            loadAvailability();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('availabilityModal');
+            const container = modal.querySelector('.modal-container');
+
+            container.classList.remove('modal-enter-active');
+            container.classList.add('modal-exit');
+
+            requestAnimationFrame(() => {
+                container.classList.remove('modal-exit');
+                container.classList.add('modal-exit-active');
+
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    container.classList.remove('modal-exit-active');
+                }, 300);
+            });
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('availabilityModal');
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>

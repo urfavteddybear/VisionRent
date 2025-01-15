@@ -55,6 +55,9 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+Route::get('/items/{item}/check-availability', [ItemController::class, 'checkAvailability'])
+    ->name('items.check-availability');
+
 // Route::get('/history', function () {
 //     return view('history');
 // })->middleware(['auth', 'verified'])->name('history');
