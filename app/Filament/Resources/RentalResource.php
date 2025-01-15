@@ -78,6 +78,16 @@ class RentalResource extends Resource
                 Tables\Columns\TextColumn::make('dp')
                 ->label('Uang Muka')
                 ->money('IDR', true),
+
+                Tables\Columns\TextColumn::make('status')
+                ->label('Status')
+                ->badge()
+                ->color(fn (string $state): string => match ($state) {
+                    'scheduled' => 'warning',
+                    'rented' => 'success',
+                    'completed' => 'gray',
+                    'returned' => 'info',
+                })
             ])
             ->actions([
                 Tables\Actions\Action::make('return')
