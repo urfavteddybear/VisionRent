@@ -36,6 +36,8 @@ Route::get('/about', function () {
     return view('about_us');
 })->name('about');
 
+Route::get('/items/{item}/check-availability', [ItemController::class, 'checkAvailability'])
+    ->name('items.check-availability');
 
 
 Route::middleware(['auth'])->group(function () {

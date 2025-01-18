@@ -80,15 +80,15 @@
     <div class="mt-4 space-y-2">
         <div class="flex items-center">
             <div class="w-4 h-4 bg-green-100 border rounded mr-2"></div>
-            <span class="text-sm">Banyak unit tersedia</span>
+            <span class="text-sm">Many units available</span>
         </div>
         <div class="flex items-center">
             <div class="w-4 h-4 bg-yellow-100 border rounded mr-2"></div>
-            <span class="text-sm">Stok terbatas</span>
+            <span class="text-sm">Limited stock</span>
         </div>
         <div class="flex items-center">
             <div class="w-4 h-4 bg-red-100 border rounded mr-2"></div>
-            <span class="text-sm">Tidak tersedia</span>
+            <span class="text-sm">Not available</span>
         </div>
     </div>
 </div>
