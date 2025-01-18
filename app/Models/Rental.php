@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,7 +48,35 @@ class Rental extends Model
                 throw new \Exception('Stok barang habis!');
             }
             // Kurangi stok barang
-            $item->decrement('stock');
+            // $item->decrement('stock');
+        });
+
+        static::creating(function ($rental) {
+            // Check if the item is available for the requested period
+            $conflictingRentals = static::where('item_id', $rental->item_id)
+                ->where(function ($query) use ($rental) {
+                    $query->whereBetween('start_date', [$rental->start_date, $rental->end_date])
+                        ->orWhereBetween('end_date', [$rental->start_date, $rental->end_date])
+                        ->orWhere(function ($q) use ($rental) {
+                            $q->where('start_date', '<=', $rental->start_date)
+                            ->where('end_date', '>=', $rental->end_date);
+                        });
+                })
+                ->count();
+
+            $item = $rental->item;
+
+            if ($conflictingRentals >= $item->stock) {
+                throw new \Exception('Barang tidak tersedia untuk periode yang dipilih!');
+            }
+
+            // Set initial status
+            $rental->status = Carbon::today()->lt($rental->start_date) ? 'scheduled' : 'rented';
+
+            // Only decrement stock if rental starts today
+            if ($rental->status === 'rented') {
+                $item->decrement('stock');
+            }
         });
     }
 
@@ -63,4 +92,5 @@ class Rental extends Model
         // Update status rental menjadi 'returned'
         $this->update(['status' => 'returned']);
     }
+
 }

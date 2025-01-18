@@ -66,7 +66,7 @@
                 </div>
                 @if($isCurrentMonth && isset($availability[$dateString]))
                 <div class="text-center text-xs">
-                    {{ $availability[$dateString]['available'] }}/{{ $availability[$dateString]['total'] }}
+                    {{ $availability[$dateString]['available'] }}
                 </div>
                 @endif
             </div>

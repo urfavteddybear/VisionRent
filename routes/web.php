@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +45,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/rental/{id}', [RentalController::class, 'show'])->name('rental.show');
     Route::get('/history', [DashboardController::class, 'showHistory'])->name('history');
 
+    Route::get('/verification', [VerificationController::class, 'showForm'])
+        ->name('verification.form');
+    Route::post('/verification', [VerificationController::class, 'submit'])
+        ->name('verification.submit');
+
+    Route::get('/verification/resubmit', [VerificationController::class, 'showResubmitForm'])
+        ->name('verification.resubmit');
+    Route::post('/verification/resubmit', [VerificationController::class, 'resubmit'])
+        ->name('verification.resubmit.submit');
+
 });
+
+Route::get('/items/{item}/check-availability', [ItemController::class, 'checkAvailability'])
+    ->name('items.check-availability');
 
 // Route::get('/history', function () {
 //     return view('history');
